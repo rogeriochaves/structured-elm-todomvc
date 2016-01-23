@@ -26,24 +26,7 @@ import String
 import StartApp.Simple as StartApp
 import Model.Task as Task exposing (newTask)
 import Model.TaskList exposing (Model, model)
-
----- UPDATE ----
-
--- A description of the kinds of actions that can be performed on the model of
--- our application. See the following for more info on this pattern and
--- some alternatives: https://github.com/evancz/elm-architecture-tutorial/
-type Action
-    = NoOp
-    | UpdateField String
-    | EditingTask Int Bool
-    | UpdateTask Int String
-    | Add
-    | Delete Int
-    | DeleteComplete
-    | Check Int Bool
-    | CheckAll Bool
-    | ChangeVisibility String
-
+import Action.TaskList exposing (..)
 
 -- How we update our Model on a given Action?
 update : Action -> Model -> Model
@@ -128,7 +111,7 @@ taskEntry : Address Action -> String -> Html
 taskEntry address task =
     header
       [ id "header" ]
-      [ h1 [] [ text "todosa" ]
+      [ h1 [] [ text "todos" ]
       , input
           [ id "new-todo"
           , placeholder "What needs to be done?"
