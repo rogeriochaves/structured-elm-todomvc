@@ -3,11 +3,12 @@ module View.Controls where
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Action.Main as Main exposing (..)
 import Action.TaskList exposing (..)
 import Signal exposing (Signal, Address)
 import Model.Task as Task
 
-controls : Address Action -> String -> List Task.Model -> Html
+controls : Address Main.Action -> String -> List Task.Model -> Html
 controls address visibility tasks =
     let tasksCompleted = List.length (List.filter .completed tasks)
         tasksLeft = List.length tasks - tasksCompleted
@@ -34,14 +35,14 @@ controls address visibility tasks =
           [ class "clear-completed"
           , id "clear-completed"
           , hidden (tasksCompleted == 0)
-          , onClick address DeleteComplete
+          , onClick address (ActionForTaskList DeleteComplete)
           ]
           [ text ("Clear completed (" ++ toString tasksCompleted ++ ")") ]
       ]
 
 
-visibilitySwap : Address Action -> String -> String -> String -> Html
+visibilitySwap : Address Main.Action -> String -> String -> String -> Html
 visibilitySwap address uri visibility actualVisibility =
     li
-      [ onClick address (ChangeVisibility visibility) ]
+      [ onClick address (ActionForTaskList <| ChangeVisibility visibility) ]
       [ a [ href uri, classList [("selected", visibility == actualVisibility)] ] [ text visibility ] ]

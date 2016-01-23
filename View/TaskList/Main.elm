@@ -3,12 +3,13 @@ module View.TaskList.Main where
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Action.Main as Main exposing (..)
 import Action.TaskList exposing (..)
 import Signal exposing (Address)
 import Model.Task as Task
 import View.TaskList.TodoItem exposing (todoItem)
 
-taskList : Address Action -> String -> List Task.Model -> Html
+taskList : Address Main.Action -> String -> List Task.Model -> Html
 taskList address visibility tasks =
     let isVisible todo =
             case visibility of
@@ -29,7 +30,7 @@ taskList address visibility tasks =
           , type' "checkbox"
           , name "toggle"
           , checked allCompleted
-          , onClick address (CheckAll (not allCompleted))
+          , onClick address (ActionForTaskList <| CheckAll (not allCompleted))
           ]
           []
       , label

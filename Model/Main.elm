@@ -1,14 +1,13 @@
 module Model.Main where
 
 import Model.TaskList as TaskList
-import Update.TaskList exposing (update)
-import Model.TaskList exposing (Model)
-import Action.Main exposing (actions)
+import Model.TaskList
 
-initialModel : Maybe Model -> Model
+type alias Model =
+  { taskList : Model.TaskList.Model
+  }
+
+initialModel : Model
 initialModel =
-  Maybe.withDefault TaskList.model
-
-model : Maybe Model -> Signal Model
-model getStorage =
-  Signal.foldp update (initialModel getStorage) actions.signal
+  { taskList = Model.TaskList.model
+  }

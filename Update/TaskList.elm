@@ -1,14 +1,21 @@
 module Update.TaskList where
 
-import Action.TaskList exposing (..)
+import Action.Main as Main exposing (..)
+import Action.TaskList as TaskList exposing (..)
 import Model.TaskList exposing (Model)
 import Model.Task exposing (newTask)
 import String
 
-update : Action -> Model -> Model
-update action model =
+update : Main.Action -> Model -> Model
+update actionFor model =
+  case actionFor of
+    ActionForTaskList action -> updateTaskList action model
+    _ -> model
+
+updateTaskList : TaskList.Action -> Model -> Model
+updateTaskList action model =
     case action of
-      NoOp -> model
+      TaskList.NoOp -> model
 
       Add ->
           { model |
