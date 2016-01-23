@@ -15,8 +15,6 @@ update actionFor model =
 updateTaskList : TaskList.Action -> Model -> Model
 updateTaskList action model =
     case action of
-      TaskList.NoOp -> model
-
       Add ->
           { model |
               uid = model.uid + 1,

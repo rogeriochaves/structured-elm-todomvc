@@ -1,8 +1,7 @@
 module Action.TaskList where
 
 type Action
-    = NoOp
-    | UpdateField String
+    = UpdateField String
     | EditingTask Int Bool
     | UpdateTask Int String
     | Add
