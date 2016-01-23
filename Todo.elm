@@ -23,43 +23,9 @@ import Html.Lazy exposing (lazy, lazy2, lazy3)
 import Json.Decode as Json
 import Signal exposing (Signal, Address)
 import String
-
----- MODEL ----
-
--- The full application state of our todo app.
-type alias Model =
-    { tasks : List Task
-    , field : String
-    , uid : Int
-    , visibility : String
-    }
-
-
-type alias Task =
-    { description : String
-    , completed : Bool
-    , editing : Bool
-    , id : Int
-    }
-
-
-newTask : String -> Int -> Task
-newTask desc id =
-    { description = desc
-    , completed = False
-    , editing = False
-    , id = id
-    }
-
-
-emptyModel : Model
-emptyModel =
-    { tasks = []
-    , visibility = "All"
-    , field = ""
-    , uid = 0
-    }
-
+import StartApp.Simple as StartApp
+import Model.Task as Task exposing (newTask)
+import Model.TaskList exposing (Model, model)
 
 ---- UPDATE ----
 
@@ -176,7 +142,7 @@ taskEntry address task =
       ]
 
 
-taskList : Address Action -> String -> List Task -> Html
+taskList : Address Action -> String -> List Task.Model -> Html
 taskList address visibility tasks =
     let isVisible todo =
             case visibility of
@@ -209,7 +175,7 @@ taskList address visibility tasks =
       ]
 
 
-todoItem : Address Action -> Task -> Html
+todoItem : Address Action -> Task.Model -> Html
 todoItem address todo =
     li
       [ classList [ ("completed", todo.completed), ("editing", todo.editing) ] ]
@@ -244,7 +210,7 @@ todoItem address todo =
       ]
 
 
-controls : Address Action -> String -> List Task -> Html
+controls : Address Action -> String -> List Task.Model -> Html
 controls address visibility tasks =
     let tasksCompleted = List.length (List.filter .completed tasks)
         tasksLeft = List.length tasks - tasksCompleted
@@ -304,45 +270,14 @@ infoFooter =
 -- wire the entire application together
 main : Signal Html
 main =
-  Signal.map (view actions.address) model
+  StartApp.start { model = model, view = view, update = update }
 
-
--- manage the model of our application over time
-model : Signal Model
+model : Model
 model =
-  Signal.foldp update initialModel actions.signal
-
-
-initialModel : Model
-initialModel =
-  Maybe.withDefault emptyModel getStorage
-
-
--- actions from user input
-actions : Signal.Mailbox Action
-actions =
-  Signal.mailbox NoOp
-
-
-port focus : Signal String
-port focus =
-    let needsFocus act =
-            case act of
-              EditingTask id bool -> bool
-              _ -> False
-
-        toSelector act =
-            case act of
-              EditingTask id _ -> "#todo-" ++ toString id
-              _ -> ""
-    in
-        actions.signal
-          |> Signal.filter needsFocus (EditingTask 0 True)
-          |> Signal.map toSelector
-
+  Maybe.withDefault model getStorage
 
 -- interactions with localStorage to save the model
 port getStorage : Maybe Model
 
-port setStorage : Signal Model
+port setStorage : Model
 port setStorage = model
