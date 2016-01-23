@@ -1,6 +1,6 @@
 {
     "version": "1.0.0",
-    "summary": "Structured TodoMVC with Elm to examplify real-world apps",
+    "summary": "Structured TodoMVC with Elm to exemplify real-world apps",
     "repository": "https://github.com/rogeriochaves/structured-elm-todomvc.git",
     "license": "BSD3",
     "source-directories": [
