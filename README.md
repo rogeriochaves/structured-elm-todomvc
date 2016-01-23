@@ -1,15 +1,16 @@
-# TodoMVC in Elm - [Try It!](http://evancz.github.io/elm-todomvc)
+# Structure TodoMVC in Elm - [Try It!](http://evancz.github.io/elm-todomvc)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
+This is based on the [official TodoMVC Elm example](https://github.com/evancz/elm-todomvc), but instead of putting all the code in one file, this project has the goal to exemplify how you would break that file in different modules to create your app structure, always following [The Elm Architecture](https://github.com/evancz/elm-architecture-tutorial).
+
 ## Project Structure
 
-All of the Elm code lives in `Todo.elm` and relies on the [elm-html][] library. 
+We have four main folders: Action, Model, Update and View.
 
-[elm-html]: http://package.elm-lang.org/packages/evancz/elm-html/latest 
+Each one of those folders have a Main.elm file, which combines all other modules, e.g. the Update.Main is a combination of all other Updates in the project, the Model.Main is a combination of all other models in the project, and so on.
 
-There also is a port handler set up in `index.html` to set the focus on
-particular text fields when necessary.
+Finally, the root main file, called Todo.elm, uses the Main Update, the Main Model and the Main View to start your app.
 
 ## Build Instructions
 
