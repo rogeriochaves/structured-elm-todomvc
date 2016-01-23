@@ -10,7 +10,7 @@ import Model.Main exposing (model)
 
 main : Signal Html
 main =
-  Signal.map (view actions.address) model
+  Signal.map (view actions.address) (model getStorage)
 
 port focus : Signal String
 port focus =
@@ -28,5 +28,7 @@ port focus =
           |> Signal.filter needsFocus (EditingTask 0 True)
           |> Signal.map toSelector
 
+port getStorage : Maybe Model
+
 port setStorage : Signal Model
-port setStorage = model
+port setStorage = model getStorage

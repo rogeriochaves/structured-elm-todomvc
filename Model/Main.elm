@@ -5,12 +5,10 @@ import Update.TaskList exposing (update)
 import Model.TaskList exposing (Model)
 import Action.Main exposing (actions)
 
-initialModel : Model
+initialModel : Maybe Model -> Model
 initialModel =
-  Maybe.withDefault TaskList.model getStorage
+  Maybe.withDefault TaskList.model
 
-model : Signal Model
-model =
-  Signal.foldp update initialModel actions.signal
-
-port getStorage : Maybe Model
+model : Maybe Model -> Signal Model
+model getStorage =
+  Signal.foldp update (initialModel getStorage) actions.signal
