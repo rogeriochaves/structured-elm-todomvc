@@ -1,58 +1,53 @@
 module Update.TaskList where
 
 import Action.Main as Main exposing (..)
+import Action.Task as Task exposing (..)
 import Action.TaskList as TaskList exposing (..)
 import Model.TaskList exposing (Model)
 import Model.Task exposing (newTask)
+import Update.Task as UpdateTask
 import String
 
 update : Main.Action -> Model -> Model
-update actionFor model =
+update actionFor taskList =
   case actionFor of
-    ActionForTaskList action -> updateTaskList action model
-    _ -> model
+    ActionForTaskList action -> updateTaskList action taskList
+    ActionForTask id action -> updateTask id action taskList
+    _ -> taskList
 
 updateTaskList : TaskList.Action -> Model -> Model
-updateTaskList action model =
-    case action of
-      Add ->
-          { model |
-              uid = model.uid + 1,
-              field = "",
-              tasks =
-                  if String.isEmpty model.field
-                    then model.tasks
-                    else model.tasks ++ [newTask model.field model.uid]
-          }
+updateTaskList action taskList =
+  case action of
+    UpdateField str ->
+      { taskList | field = str }
 
-      UpdateField str ->
-          { model | field = str }
+    Add ->
+      { taskList |
+          uid = taskList.uid + 1,
+          field = "",
+          tasks =
+              if String.isEmpty taskList.field
+                then taskList.tasks
+                else taskList.tasks ++ [newTask taskList.field taskList.uid]
+      }
 
-      EditingTask id isEditing ->
-          let updateTask t = if t.id == id then { t | editing = isEditing } else t
-          in
-              { model | tasks = List.map updateTask model.tasks }
+    Delete id ->
+      { taskList | tasks = List.filter (\t -> t.id /= id) taskList.tasks }
 
-      UpdateTask id task ->
-          let updateTask t = if t.id == id then { t | description = task } else t
-          in
-              { model | tasks = List.map updateTask model.tasks }
+    DeleteComplete ->
+      { taskList | tasks = List.filter (not << .completed) taskList.tasks }
 
-      Delete id ->
-          { model | tasks = List.filter (\t -> t.id /= id) model.tasks }
+    CheckAll isCompleted ->
+      let updateTask t = UpdateTask.update t.id (Check isCompleted) t
+      in
+        { taskList | tasks = List.map updateTask taskList.tasks }
 
-      DeleteComplete ->
-          { model | tasks = List.filter (not << .completed) model.tasks }
+    ChangeVisibility visibility ->
+      { taskList | visibility = visibility }
 
-      Check id isCompleted ->
-          let updateTask t = if t.id == id then { t | completed = isCompleted } else t
-          in
-              { model | tasks = List.map updateTask model.tasks }
-
-      CheckAll isCompleted ->
-          let updateTask t = { t | completed = isCompleted }
-          in
-              { model | tasks = List.map updateTask model.tasks }
-
-      ChangeVisibility visibility ->
-          { model | visibility = visibility }
+updateTask : Int -> Task.Action -> Model -> Model
+updateTask id action taskList =
+  let
+    updateTask task = if task.id == id then UpdateTask.update id action task else task
+  in
+    { taskList | tasks = List.map updateTask taskList.tasks }

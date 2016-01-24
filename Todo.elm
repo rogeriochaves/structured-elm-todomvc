@@ -3,7 +3,7 @@ module Todo where
 import Html exposing (..)
 import Signal exposing (Signal, Address)
 import Action.Main exposing (..)
-import Action.TaskList exposing (..)
+import Action.Task exposing (..)
 import Model.Main exposing (Model)
 import View.Main exposing (view)
 import Action.Main exposing (actions)
@@ -17,16 +17,16 @@ port focus : Signal String
 port focus =
     let needsFocus act =
             case act of
-              ActionForTaskList (EditingTask id bool) -> bool
+              ActionForTask id (Editing bool) -> bool
               _ -> False
 
         toSelector act =
             case act of
-              ActionForTaskList (EditingTask id _) -> "#todo-" ++ toString id
+              ActionForTask id (Editing _) -> "#todo-" ++ toString id
               _ -> ""
     in
         actions.signal
-          |> Signal.filter needsFocus (ActionForTaskList (EditingTask 0 True))
+          |> Signal.filter needsFocus (ActionForTask 0 (Editing True))
           |> Signal.map toSelector
 
 port getStorage : Maybe Model
