@@ -7,14 +7,16 @@ import Action.Main exposing (..)
 import Signal exposing (Address)
 import Model.Main exposing (Model)
 import View.TaskList.Main as TaskListView
-import View.TaskEntry exposing (taskEntry)
-import View.Controls as Controls
+import View.TaskEntry as TaskEntryView
+import View.Controls as ControlsView
 import View.InfoFooter exposing (infoFooter)
 
 view : Address Action -> Model -> Html
 view address model =
     let
       taskList = model.taskList
+      taskEntry = model.taskEntry
+      control = model.control
     in
       div
         [ class "todomvc-wrapper"
@@ -22,9 +24,9 @@ view address model =
         ]
         [ section
             [ id "todoapp" ]
-            [ lazy2 taskEntry address model.taskEntry
-            , lazy3 TaskListView.taskList address model.control.visibility taskList.tasks
-            , lazy3 Controls.controls address model.control.visibility taskList.tasks
+            [ lazy2 TaskEntryView.taskEntry address taskEntry
+            , lazy3 TaskListView.taskList address control.visibility taskList
+            , lazy3 ControlsView.controls address control.visibility taskList
             ]
         , infoFooter
         ]

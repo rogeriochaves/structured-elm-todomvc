@@ -19,27 +19,24 @@ updateTaskList : TaskList.Action -> Model -> Model
 updateTaskList action taskList =
   case action of
     Add id description ->
-      { taskList |
-          tasks =
-              if String.isEmpty description
-                then taskList.tasks
-                else taskList.tasks ++ [newTask id description]
-      }
+      if String.isEmpty description
+        then taskList
+        else taskList ++ [newTask id description]
 
     Delete id ->
-      { taskList | tasks = List.filter (\t -> t.id /= id) taskList.tasks }
+      List.filter (\t -> t.id /= id) taskList
 
     DeleteComplete ->
-      { taskList | tasks = List.filter (not << .completed) taskList.tasks }
+      List.filter (not << .completed) taskList
 
     CheckAll isCompleted ->
       let updateTask t = UpdateTask.updateTask (Check isCompleted) t
       in
-        { taskList | tasks = List.map updateTask taskList.tasks }
+        List.map updateTask taskList
 
 updateTask : Int -> Task.Action -> Model -> Model
 updateTask id action taskList =
   let
     updateTask task = if task.id == id then UpdateTask.updateTask action task else task
   in
-    { taskList | tasks = List.map updateTask taskList.tasks }
+    List.map updateTask taskList
