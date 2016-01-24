@@ -2,12 +2,12 @@ module Todo where
 
 import Html exposing (..)
 import Signal exposing (Signal, Address)
-import Action.Main exposing (..)
-import Action.Task exposing (..)
-import Model.Main exposing (Model)
-import View.Main exposing (view)
-import Action.Main exposing (actions)
-import Update.Main exposing (model)
+import TodoApp.Action exposing (..)
+import TodoApp.Task.Action exposing (..)
+import TodoApp.Model exposing (Model)
+import TodoApp.View.TodoApp exposing (view)
+import TodoApp.Action exposing (actions)
+import TodoApp.Update exposing (model)
 
 main : Signal Html
 main =
