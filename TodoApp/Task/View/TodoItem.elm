@@ -1,14 +1,14 @@
-module View.TaskList.TodoItem where
+module TodoApp.Task.View.TodoItem where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Action.Main as Main exposing (..)
-import Action.Task exposing (..)
-import Action.TaskList exposing (..)
+import TodoApp.Action as Main exposing (..)
+import TodoApp.Task.Action exposing (..)
+import TodoApp.TaskList.Action exposing (..)
 import Signal exposing (Address)
-import Model.Task as Task
-import View.Events exposing (onEnter)
+import TodoApp.Task.Model as Task
+import TodoApp.Task.View.Events exposing (onEnter)
 
 todoItem : Address Main.Action -> Task.Model -> Html
 todoItem address todo =

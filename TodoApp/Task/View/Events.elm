@@ -1,4 +1,4 @@
-module View.Events where
+module TodoApp.Task.View.Events where
 
 import Html exposing (..)
 import Html.Events exposing (..)

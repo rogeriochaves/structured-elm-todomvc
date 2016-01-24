@@ -1,13 +1,13 @@
-module View.TaskList.Main where
+module TodoApp.TaskList.View.TaskList where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Action.Main as Main exposing (..)
-import Action.TaskList exposing (..)
+import TodoApp.Action as Main exposing (..)
+import TodoApp.TaskList.Action exposing (..)
 import Signal exposing (Address)
-import Model.Task as Task
-import View.TaskList.TodoItem exposing (todoItem)
+import TodoApp.Task.Model as Task
+import TodoApp.Task.View.TodoItem exposing (todoItem)
 
 taskList : Address Main.Action -> String -> List Task.Model -> Html
 taskList address visibility tasks =

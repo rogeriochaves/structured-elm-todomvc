@@ -1,15 +1,15 @@
-module View.Main where
+module TodoApp.View.TodoApp where
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Lazy exposing (lazy, lazy2, lazy3)
-import Action.Main exposing (..)
+import TodoApp.Action exposing (..)
 import Signal exposing (Address)
-import Model.Main exposing (Model)
-import View.TaskList.Main as TaskListView
-import View.TaskEntry as TaskEntryView
-import View.Controls as ControlsView
-import View.InfoFooter exposing (infoFooter)
+import TodoApp.Model exposing (Model)
+import TodoApp.TaskList.View.TaskList as TaskListView
+import TodoApp.Task.View.TaskEntry as TaskEntryView
+import TodoApp.Control.View.Controls as ControlsView
+import TodoApp.View.InfoFooter exposing (infoFooter)
 
 view : Address Action -> Model -> Html
 view address model =
