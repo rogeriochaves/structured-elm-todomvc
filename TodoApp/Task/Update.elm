@@ -1,9 +1,9 @@
-module Update.Task where
+module TodoApp.Task.Update where
 
-import Action.Main as Main exposing (..)
-import Action.Task as Task exposing (..)
-import Action.TaskList exposing (..)
-import Model.Task exposing (Model, newTask)
+import TodoApp.Action as Main exposing (..)
+import TodoApp.Task.Action as Task exposing (..)
+import TodoApp.TaskList.Action exposing (..)
+import TodoApp.Task.Model exposing (Model, newTask)
 
 update : Main.Action -> Model -> Model
 update actionFor task =

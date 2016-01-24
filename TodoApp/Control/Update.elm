@@ -1,8 +1,8 @@
-module Update.Control where
+module TodoApp.Control.Update where
 
-import Action.Main as Main exposing (..)
-import Action.Control as Control exposing (..)
-import Model.Control exposing (Model)
+import TodoApp.Action as Main exposing (..)
+import TodoApp.Control.Action as Control exposing (..)
+import TodoApp.Control.Model exposing (Model)
 
 update : Main.Action -> Model -> Model
 update actionFor control =

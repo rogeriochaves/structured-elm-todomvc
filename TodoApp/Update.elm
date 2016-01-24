@@ -1,10 +1,10 @@
-module Update.Main where
+module TodoApp.Update where
 
-import Action.Main exposing (..)
-import Model.Main exposing (Model, initialModel)
-import Update.Task as Task
-import Update.TaskList as TaskList
-import Update.Control as Control
+import TodoApp.Action exposing (..)
+import TodoApp.Model exposing (Model, initialModel)
+import TodoApp.Task.Update as Task
+import TodoApp.TaskList.Update as TaskList
+import TodoApp.Control.Update as Control
 
 update : Action -> Model -> Model
 update action model =
