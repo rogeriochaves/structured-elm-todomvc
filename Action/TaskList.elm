@@ -1,8 +1,7 @@
 module Action.TaskList where
 
 type Action
-    = UpdateField String
-    | Add
+    = Add Int String
     | Delete Int
     | DeleteComplete
     | CheckAll Bool

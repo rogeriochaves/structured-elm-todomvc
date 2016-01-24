@@ -1,13 +1,15 @@
 module Model.Main where
 
-import Model.TaskList as TaskList
+import Model.Task
 import Model.TaskList
 
 type alias Model =
-  { taskList : Model.TaskList.Model
+  { taskEntry : Model.Task.Model
+  , taskList : Model.TaskList.Model
   }
 
 initialModel : Model
 initialModel =
-  { taskList = Model.TaskList.model
+  { taskEntry = Model.Task.model
+  , taskList = Model.TaskList.model
   }

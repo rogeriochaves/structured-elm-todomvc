@@ -5,6 +5,7 @@ import Action.TaskList
 import Action.Task
 
 type Action = NoOp
+            | ActionForTaskEntry Action.Task.Action
             | ActionForTask Int Action.Task.Action
             | ActionForTaskList Action.TaskList.Action
 

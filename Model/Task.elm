@@ -7,10 +7,13 @@ type alias Model =
     , id : Int
     }
 
-newTask : String -> Int -> Model
-newTask desc id =
-    { description = desc
-    , completed = False
-    , editing = False
-    , id = id
-    }
+newTask : Int -> String -> Model
+newTask id description =
+  { description = description
+  , completed = False
+  , editing = False
+  , id = id
+  }
+
+model : Model
+model = newTask 1 ""
