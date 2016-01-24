@@ -12,6 +12,8 @@ Each one of those folders have a Main.elm file, which combines all other modules
 
 Finally, the root main file, called Todo.elm, uses the Main Update, the Main Model and the Main View to start your app.
 
+<a href="https://github.com/rogeriochaves/structured-elm-todomvc/tree/modular" style="font-size:22px">Checkout the modularized alternative too</a>
+
 ## Build Instructions
 
 Run the following command from the root of this project:
