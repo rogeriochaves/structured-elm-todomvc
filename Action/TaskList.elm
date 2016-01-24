@@ -5,4 +5,3 @@ type Action
     | Delete Int
     | DeleteComplete
     | CheckAll Bool
-    | ChangeVisibility String

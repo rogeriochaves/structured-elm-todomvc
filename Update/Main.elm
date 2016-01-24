@@ -2,14 +2,16 @@ module Update.Main where
 
 import Action.Main exposing (..)
 import Model.Main exposing (Model, initialModel)
-import Update.Task
-import Update.TaskList
+import Update.Task as Task
+import Update.TaskList as TaskList
+import Update.Control as Control
 
 update : Action -> Model -> Model
 update action model =
   { model |
-      taskEntry = Update.Task.update action model.taskEntry,
-      taskList = Update.TaskList.update action model.taskList
+      taskEntry = Task.update action model.taskEntry,
+      taskList = TaskList.update action model.taskList,
+      control = Control.update action model.control
   }
 
 model : Maybe Model -> Signal Model

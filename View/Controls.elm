@@ -5,6 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Action.Main as Main exposing (..)
 import Action.TaskList exposing (..)
+import Action.Control exposing (..)
 import Signal exposing (Signal, Address)
 import Model.Task as Task
 
@@ -44,5 +45,5 @@ controls address visibility tasks =
 visibilitySwap : Address Main.Action -> String -> String -> String -> Html
 visibilitySwap address uri visibility actualVisibility =
     li
-      [ onClick address (ActionForTaskList <| ChangeVisibility visibility) ]
+      [ onClick address (ActionForControl <| ChangeVisibility visibility) ]
       [ a [ href uri, classList [("selected", visibility == actualVisibility)] ] [ text visibility ] ]

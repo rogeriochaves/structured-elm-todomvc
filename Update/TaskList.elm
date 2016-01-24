@@ -37,9 +37,6 @@ updateTaskList action taskList =
       in
         { taskList | tasks = List.map updateTask taskList.tasks }
 
-    ChangeVisibility visibility ->
-      { taskList | visibility = visibility }
-
 updateTask : Int -> Task.Action -> Model -> Model
 updateTask id action taskList =
   let

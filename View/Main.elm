@@ -23,8 +23,8 @@ view address model =
         [ section
             [ id "todoapp" ]
             [ lazy2 taskEntry address model.taskEntry
-            , lazy3 TaskListView.taskList address taskList.visibility taskList.tasks
-            , lazy3 Controls.controls address taskList.visibility taskList.tasks
+            , lazy3 TaskListView.taskList address model.control.visibility taskList.tasks
+            , lazy3 Controls.controls address model.control.visibility taskList.tasks
             ]
         , infoFooter
         ]

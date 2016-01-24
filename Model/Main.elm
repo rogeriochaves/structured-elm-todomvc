@@ -1,15 +1,18 @@
 module Model.Main where
 
-import Model.Task
-import Model.TaskList
+import Model.Task as Task
+import Model.TaskList as TaskList
+import Model.Control as Control
 
 type alias Model =
-  { taskEntry : Model.Task.Model
-  , taskList : Model.TaskList.Model
+  { taskEntry : Task.Model
+  , taskList : TaskList.Model
+  , control : Control.Model
   }
 
 initialModel : Model
 initialModel =
-  { taskEntry = Model.Task.model
-  , taskList = Model.TaskList.model
+  { taskEntry = Task.model
+  , taskList = TaskList.model
+  , control = Control.model
   }
