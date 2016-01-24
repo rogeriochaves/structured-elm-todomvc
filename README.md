@@ -1,4 +1,4 @@
-# Structure TodoMVC in Elm - [Try It!](http://evancz.github.io/elm-todomvc)
+# Structured TodoMVC in Elm
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
