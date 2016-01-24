@@ -38,7 +38,7 @@ updateTaskList action taskList =
       { taskList | tasks = List.filter (not << .completed) taskList.tasks }
 
     CheckAll isCompleted ->
-      let updateTask t = UpdateTask.update t.id (Check isCompleted) t
+      let updateTask t = UpdateTask.update (Check isCompleted) t
       in
         { taskList | tasks = List.map updateTask taskList.tasks }
 
@@ -48,6 +48,6 @@ updateTaskList action taskList =
 updateTask : Int -> Task.Action -> Model -> Model
 updateTask id action taskList =
   let
-    updateTask task = if task.id == id then UpdateTask.update id action task else task
+    updateTask task = if task.id == id then UpdateTask.update action task else task
   in
     { taskList | tasks = List.map updateTask taskList.tasks }
