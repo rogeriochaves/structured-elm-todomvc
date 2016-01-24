@@ -1,4 +1,4 @@
-module Model.Control where
+module TodoApp.Control.Model where
 
 type alias Model =
     { visibility : String

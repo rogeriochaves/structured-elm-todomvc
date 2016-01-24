@@ -1,8 +1,8 @@
-module Model.Main where
+module TodoApp.Model where
 
-import Model.Task as Task
-import Model.TaskList as TaskList
-import Model.Control as Control
+import TodoApp.Task.Model as Task
+import TodoApp.TaskList.Model as TaskList
+import TodoApp.Control.Model as Control
 
 type alias Model =
   { taskEntry : Task.Model

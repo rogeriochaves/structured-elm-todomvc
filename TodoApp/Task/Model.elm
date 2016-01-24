@@ -1,4 +1,4 @@
-module Model.Task where
+module TodoApp.Task.Model where
 
 type alias Model =
     { description : String
