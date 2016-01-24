@@ -1,9 +1,9 @@
-module Action.Main where
+module TodoApp.Action where
 
 import Signal exposing (Signal)
-import Action.TaskList as TaskList
-import Action.Task as Task
-import Action.Control as Control
+import TodoApp.TaskList.Action as TaskList
+import TodoApp.Task.Action as Task
+import TodoApp.Control.Action as Control
 
 type Action = NoOp
             | ActionForTaskEntry Task.Action

@@ -1,4 +1,4 @@
-module Action.Task where
+module TodoApp.Task.Action where
 
 type Action
     = Check Bool

@@ -1,4 +1,4 @@
-module Action.TaskList where
+module TodoApp.TaskList.Action where
 
 type Action
     = Add Int String
