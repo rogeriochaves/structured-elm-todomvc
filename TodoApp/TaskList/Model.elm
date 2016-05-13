@@ -1,8 +1,12 @@
-module TodoApp.TaskList.Model where
+module TodoApp.TaskList.Model exposing (..)
 
 import TodoApp.Task.Model as Task
 
-type alias Model = List Task.Model
+
+type alias Model =
+  List Task.Model
+
 
 model : Model
-model = []
+model =
+  []

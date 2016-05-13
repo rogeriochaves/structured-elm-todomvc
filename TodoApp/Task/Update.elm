@@ -1,26 +1,35 @@
-module TodoApp.Task.Update where
+module TodoApp.Task.Update exposing (..)
 
-import TodoApp.Action as Main exposing (..)
-import TodoApp.Task.Action as Task exposing (..)
-import TodoApp.TaskList.Action exposing (..)
+import TodoApp.Msg as Main exposing (..)
+import TodoApp.Task.Msg as Task exposing (..)
+import TodoApp.TaskList.Msg as TaskList exposing (..)
 import TodoApp.Task.Model exposing (Model, newTask)
 
-update : Main.Action -> Model -> Model
+
+update : Main.Msg -> Model -> Model
 update actionFor task =
   case actionFor of
-    ActionForTaskEntry action -> updateTask action task
-    ActionForTask _ action -> updateTask action task
-    ActionForTaskList (Add id _) -> newTask (id + 1) ""
-    _ -> task
+    MsgForTask _ action ->
+      updateTask action task
 
-updateTask : Task.Action -> Model -> Model
+    MsgForTaskEntry action ->
+      updateTask action task
+
+    MsgForTaskList (Add id _) ->
+      newTask (id + 1) ""
+
+    _ ->
+      task
+
+
+updateTask : Task.Msg -> Model -> Model
 updateTask action model =
-    case action of
-      Check isCompleted ->
-        { model | completed = isCompleted }
+  case action of
+    Check isCompleted ->
+      { model | completed = isCompleted }
 
-      Editing isEditing ->
-        { model | editing = isEditing }
+    Editing isEditing ->
+      { model | editing = isEditing }
 
-      Update description ->
-        { model | description = description }
+    Update description ->
+      { model | description = description }
