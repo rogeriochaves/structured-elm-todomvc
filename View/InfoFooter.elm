@@ -1,9 +1,9 @@
-module View.InfoFooter where
+module View.InfoFooter exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 
-infoFooter : Html
+infoFooter : Html msg
 infoFooter =
     footer [ id "info" ]
       [ p [] [ text "Double-click to edit a todo" ]

@@ -1,4 +1,4 @@
-module Model.TaskList where
+module Model.TaskList exposing (..)
 
 import Model.Task as Task
 

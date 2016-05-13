@@ -1,17 +1,16 @@
-module View.TaskEntry where
+module View.TaskEntry exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Action.Main as Main exposing (..)
-import Action.TaskList exposing (..)
-import Action.Task exposing (..)
-import Signal exposing (Address)
+import Msg.Main as Main exposing (..)
+import Msg.TaskList exposing (..)
+import Msg.Task exposing (..)
 import View.Events exposing (onEnter)
 import Model.Task exposing (Model)
 
-taskEntry : Address Main.Action -> Model -> Html
-taskEntry address taskEntry =
+taskEntry : Model -> Html Main.Msg
+taskEntry taskEntry =
     header
       [ id "header" ]
       [ h1 [] [ text "todos" ]
@@ -21,8 +20,8 @@ taskEntry address taskEntry =
           , autofocus True
           , value taskEntry.description
           , name "newTodo"
-          , on "input" targetValue (Signal.message address << ActionForTaskEntry << Update)
-          , onEnter address (ActionForTaskList (Add taskEntry.id taskEntry.description))
+          , onInput (MsgForTaskEntry << Update)
+          , onEnter NoOp (MsgForTaskList (Add taskEntry.id taskEntry.description))
           ]
           []
       ]

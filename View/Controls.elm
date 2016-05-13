@@ -1,16 +1,15 @@
-module View.Controls where
+module View.Controls exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Action.Main as Main exposing (..)
-import Action.TaskList exposing (..)
-import Action.Control exposing (..)
-import Signal exposing (Signal, Address)
+import Msg.Main as Main exposing (..)
+import Msg.TaskList exposing (..)
+import Msg.Control exposing (..)
 import Model.Task as Task
 
-controls : Address Main.Action -> String -> List Task.Model -> Html
-controls address visibility tasks =
+controls : String -> List Task.Model -> Html Main.Msg
+controls visibility tasks =
     let tasksCompleted = List.length (List.filter .completed tasks)
         tasksLeft = List.length tasks - tasksCompleted
         item_ = if tasksLeft == 1 then " item" else " items"
@@ -26,24 +25,24 @@ controls address visibility tasks =
           ]
       , ul
           [ id "filters" ]
-          [ visibilitySwap address "#/" "All" visibility
+          [ visibilitySwap "#/" "All" visibility
           , text " "
-          , visibilitySwap address "#/active" "Active" visibility
+          , visibilitySwap "#/active" "Active" visibility
           , text " "
-          , visibilitySwap address "#/completed" "Completed" visibility
+          , visibilitySwap "#/completed" "Completed" visibility
           ]
       , button
           [ class "clear-completed"
           , id "clear-completed"
           , hidden (tasksCompleted == 0)
-          , onClick address (ActionForTaskList DeleteComplete)
+          , onClick (MsgForTaskList DeleteComplete)
           ]
           [ text ("Clear completed (" ++ toString tasksCompleted ++ ")") ]
       ]
 
 
-visibilitySwap : Address Main.Action -> String -> String -> String -> Html
-visibilitySwap address uri visibility actualVisibility =
+visibilitySwap : String -> String -> String -> Html Main.Msg
+visibilitySwap uri visibility actualVisibility =
     li
-      [ onClick address (ActionForControl <| ChangeVisibility visibility) ]
+      [ onClick (MsgForControl <| ChangeVisibility visibility) ]
       [ a [ href uri, classList [("selected", visibility == actualVisibility)] ] [ text visibility ] ]

@@ -1,17 +1,17 @@
-module Update.Control where
+module Update.Control exposing (..)
 
-import Action.Main as Main exposing (..)
-import Action.Control as Control exposing (..)
+import Msg.Main as Main exposing (..)
+import Msg.Control as Control exposing (..)
 import Model.Control exposing (Model)
 
-update : Main.Action -> Model -> Model
-update actionFor control =
-  case actionFor of
-    ActionForControl action -> updateControl action control
+update : Main.Msg -> Model -> Model
+update msgFor control =
+  case msgFor of
+    MsgForControl msg -> updateControl msg control
     _ -> control
 
-updateControl : Control.Action -> Model -> Model
-updateControl action model =
-    case action of
+updateControl : Control.Msg -> Model -> Model
+updateControl msg model =
+    case msg of
       ChangeVisibility visibility ->
         { model | visibility = visibility }

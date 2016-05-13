@@ -1,35 +1,27 @@
-module Todo where
+port module Todo exposing (..)
 
 import Html exposing (..)
-import Signal exposing (Signal, Address)
-import Action.Main exposing (..)
-import Action.Task exposing (..)
-import Model.Main exposing (Model)
+import Html.App as App
+import Msg.Main exposing (..)
+import Model.Main exposing (Model, init)
 import View.Main exposing (view)
-import Action.Main exposing (actions)
-import Update.Main exposing (model)
+import Update.Main exposing (update)
 
-main : Signal Html
+
+main : Program (Maybe Model)
 main =
-  Signal.map (view actions.address) (model getStorage)
+  App.programWithFlags
+    { init = init
+    , view = view
+    , update = (\msg model -> withSetStorage (update msg model))
+    , subscriptions = \_ -> Sub.none
+    }
 
-port focus : Signal String
-port focus =
-    let needsFocus act =
-            case act of
-              ActionForTask id (Editing bool) -> bool
-              _ -> False
 
-        toSelector act =
-            case act of
-              ActionForTask id (Editing _) -> "#todo-" ++ toString id
-              _ -> ""
-    in
-        actions.signal
-          |> Signal.filter needsFocus (ActionForTask 0 (Editing True))
-          |> Signal.map toSelector
+withSetStorage : ( Model, Cmd Msg ) -> ( Model, Cmd Msg )
+withSetStorage (model, cmds) =
+  ( model, Cmd.batch [ setStorage model, cmds ] )
 
-port getStorage : Maybe Model
 
-port setStorage : Signal Model
-port setStorage = model getStorage
+port setStorage : Model -> Cmd msg
+port focus : String -> Cmd msg

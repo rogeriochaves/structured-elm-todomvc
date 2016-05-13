@@ -1,18 +1,17 @@
-module View.Main where
+module View.Main exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Html.Lazy exposing (lazy, lazy2, lazy3)
-import Action.Main exposing (..)
-import Signal exposing (Address)
+import Html.Lazy exposing (lazy, lazy2)
+import Msg.Main exposing (..)
 import Model.Main exposing (Model)
 import View.TaskList.Main as TaskListView
 import View.TaskEntry as TaskEntryView
 import View.Controls as ControlsView
 import View.InfoFooter exposing (infoFooter)
 
-view : Address Action -> Model -> Html
-view address model =
+view : Model -> Html Msg
+view model =
     let
       taskList = model.taskList
       taskEntry = model.taskEntry
@@ -24,9 +23,9 @@ view address model =
         ]
         [ section
             [ id "todoapp" ]
-            [ lazy2 TaskEntryView.taskEntry address taskEntry
-            , lazy3 TaskListView.taskList address control.visibility taskList
-            , lazy3 ControlsView.controls address control.visibility taskList
+            [ lazy TaskEntryView.taskEntry taskEntry
+            , lazy2 TaskListView.taskList control.visibility taskList
+            , lazy2 ControlsView.controls control.visibility taskList
             ]
         , infoFooter
         ]
