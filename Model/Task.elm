@@ -1,4 +1,4 @@
-module Model.Task where
+module Model.Task exposing (..)
 
 type alias Model =
     { description : String

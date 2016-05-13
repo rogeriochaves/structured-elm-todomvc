@@ -1,21 +1,21 @@
-module Update.Task where
+module Update.Task exposing (..)
 
-import Action.Main as Main exposing (..)
-import Action.Task as Task exposing (..)
-import Action.TaskList exposing (..)
+import Msg.Main as Main exposing (..)
+import Msg.Task as Task exposing (..)
+import Msg.TaskList exposing (..)
 import Model.Task exposing (Model, newTask)
 
-update : Main.Action -> Model -> Model
-update actionFor task =
-  case actionFor of
-    ActionForTaskEntry action -> updateTask action task
-    ActionForTask _ action -> updateTask action task
-    ActionForTaskList (Add id _) -> newTask (id + 1) ""
+update : Main.Msg -> Model -> Model
+update msgFor task =
+  case msgFor of
+    MsgForTaskEntry msg -> updateTask msg task
+    MsgForTask _ msg -> updateTask msg task
+    MsgForTaskList (Add id _) -> newTask (id + 1) ""
     _ -> task
 
-updateTask : Task.Action -> Model -> Model
-updateTask action model =
-    case action of
+updateTask : Task.Msg -> Model -> Model
+updateTask msg model =
+    case msg of
       Check isCompleted ->
         { model | completed = isCompleted }
 

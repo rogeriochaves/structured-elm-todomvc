@@ -1,4 +1,4 @@
-module Model.Control where
+module Model.Control exposing (..)
 
 type alias Model =
     { visibility : String
