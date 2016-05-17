@@ -1,45 +1,43 @@
-module View.TaskList.TodoItem where
+module View.TaskList.TodoItem exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Action.Main as Main exposing (..)
-import Action.Task exposing (..)
-import Action.TaskList exposing (..)
-import Signal exposing (Address)
+import Msg.Main as Main exposing (..)
+import Msg.Task exposing (..)
+import Msg.TaskList exposing (..)
 import Model.Task as Task
 import View.Events exposing (onEnter)
+import Json.Decode as Json
 
-todoItem : Address Main.Action -> Task.Model -> Html
-todoItem address todo =
-    li
-      [ classList [ ("completed", todo.completed), ("editing", todo.editing) ] ]
-      [ div
-          [ class "view" ]
-          [ input
-              [ class "toggle"
-              , type' "checkbox"
-              , checked todo.completed
-              , onClick address (ActionForTask todo.id <| Check (not todo.completed))
-              ]
-              []
-          , label
-              [ onDoubleClick address (ActionForTask todo.id <| Editing True) ]
-              [ text todo.description ]
-          , button
-              [ class "destroy"
-              , onClick address (ActionForTaskList <| Delete todo.id)
-              ]
-              []
-          ]
-      , input
-          [ class "edit"
-          , value todo.description
-          , name "title"
-          , id ("todo-" ++ toString todo.id)
-          , on "input" targetValue (Signal.message address << ActionForTask todo.id << Update)
-          , onBlur address (ActionForTask todo.id <| Editing False)
-          , onEnter address (ActionForTask todo.id <| Editing False)
-          ]
-          []
-      ]
+
+todoItem : Task.Model -> Html Main.Msg
+todoItem todo =
+    li [ classList [ ( "completed", todo.completed ), ( "editing", todo.editing ) ] ]
+        [ div [ class "view" ]
+            [ input
+                [ class "toggle"
+                , type' "checkbox"
+                , checked todo.completed
+                , onClick (MsgForTask todo.id <| Check (not todo.completed))
+                ]
+                []
+            , label [ onDoubleClick (MsgForTask todo.id <| Editing True) ]
+                [ text todo.description ]
+            , button
+                [ class "destroy"
+                , onClick (MsgForTaskList <| Delete todo.id)
+                ]
+                []
+            ]
+        , input
+            [ class "edit"
+            , value todo.description
+            , name "title"
+            , id ("todo-" ++ toString todo.id)
+            , on "input" (Json.map (MsgForTask todo.id << Update) targetValue)
+            , onBlur (MsgForTask todo.id <| Editing False)
+            , onEnter NoOp (MsgForTask todo.id <| Editing False)
+            ]
+            []
+        ]

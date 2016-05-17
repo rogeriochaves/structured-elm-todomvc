@@ -1,4 +1,5 @@
-module Model.Task where
+module Model.Task exposing (..)
+
 
 type alias Model =
     { description : String
@@ -7,13 +8,16 @@ type alias Model =
     , id : Int
     }
 
+
 newTask : Int -> String -> Model
 newTask id description =
-  { description = description
-  , completed = False
-  , editing = False
-  , id = id
-  }
+    { description = description
+    , completed = False
+    , editing = False
+    , id = id
+    }
+
 
 model : Model
-model = newTask 1 ""
+model =
+    newTask 1 ""

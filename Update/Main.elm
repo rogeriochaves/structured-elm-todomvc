@@ -1,19 +1,29 @@
-module Update.Main where
+module Update.Main exposing (..)
 
-import Action.Main exposing (..)
+import Msg.Main exposing (..)
 import Model.Main exposing (Model, initialModel)
 import Update.Task as Task
 import Update.TaskList as TaskList
 import Update.Control as Control
 
-update : Action -> Model -> Model
-update action model =
-  { model |
-      taskEntry = Task.update action model.taskEntry,
-      taskList = TaskList.update action model.taskList,
-      control = Control.update action model.control
-  }
 
-model : Maybe Model -> Signal Model
-model getStorage =
-  Signal.foldp update (Maybe.withDefault initialModel getStorage) actions.signal
+type alias FocusPort =
+    String -> Cmd Msg
+
+
+update : FocusPort -> Msg -> Model -> ( Model, Cmd Msg )
+update focus action model =
+    ( { model
+        | taskEntry = Task.update action model.taskEntry
+        , taskList = TaskList.update action model.taskList
+        , control = Control.update action model.control
+      }
+    , updateCmd focus action
+    )
+
+
+updateCmd : FocusPort -> Msg -> Cmd Msg
+updateCmd focus action =
+    Cmd.batch
+        [ Task.updateTaskCmd focus action
+        ]

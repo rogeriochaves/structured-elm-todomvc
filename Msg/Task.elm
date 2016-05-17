@@ -1,6 +1,7 @@
-module Action.Task where
+module Msg.Task exposing (..)
 
-type Action
+
+type Msg
     = Check Bool
     | Editing Bool
     | Update String

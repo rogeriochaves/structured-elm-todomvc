@@ -1,6 +1,7 @@
-module Action.TaskList where
+module Msg.TaskList exposing (..)
 
-type Action
+
+type Msg
     = Add Int String
     | Delete Int
     | DeleteComplete
