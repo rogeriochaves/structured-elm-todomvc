@@ -11,15 +11,18 @@ type alias FocusPort =
     String -> Cmd Msg
 
 
-update : FocusPort -> Msg -> Model -> ( Model, Cmd Msg )
-update focus action model =
-    ( { model
+updateWithCmd : FocusPort -> Msg -> Model -> ( Model, Cmd Msg )
+updateWithCmd focus action model =
+    ( update action model, updateCmd focus action )
+
+
+update : Msg -> Model -> Model
+update action model =
+    { model
         | taskEntry = Task.update action model.taskEntry
         , taskList = TaskList.update action model.taskList
         , control = Control.update action model.control
-      }
-    , updateCmd focus action
-    )
+    }
 
 
 updateCmd : FocusPort -> Msg -> Cmd Msg
