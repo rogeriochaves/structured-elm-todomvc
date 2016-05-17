@@ -1,4 +1,4 @@
-module Msg.Control exposing (..)
+module TodoApp.Control.Msg exposing (..)
 
 
 type Msg

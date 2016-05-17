@@ -3,8 +3,8 @@ module View.TaskList.Main exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Msg.Main as Main exposing (..)
-import Msg.TaskList exposing (..)
+import TodoApp.Msg  as Main exposing (..)
+import TodoApp.TaskList.Msg exposing (..)
 import TodoApp.Task.Model as Task
 import View.TaskList.TodoItem exposing (todoItem)
 

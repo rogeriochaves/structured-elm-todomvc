@@ -1,8 +1,8 @@
-module Msg.Main exposing (..)
+module TodoApp.Msg  exposing (..)
 
-import Msg.TaskList as TaskList
-import Msg.Task as Task
-import Msg.Control as Control
+import TodoApp.TaskList.Msg as TaskList
+import TodoApp.Task.Msg as Task
+import TodoApp.Control.Msg as Control
 
 
 type Msg

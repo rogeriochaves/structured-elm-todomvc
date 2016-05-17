@@ -1,6 +1,6 @@
 module TodoApp.Update  exposing (..)
 
-import Msg.Main exposing (..)
+import TodoApp.Msg  exposing (..)
 import TodoApp.Model exposing (Model)
 import TodoApp.Task.Update as Task
 import TodoApp.TaskList.Update as TaskList

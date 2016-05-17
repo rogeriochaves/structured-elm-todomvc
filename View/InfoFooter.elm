@@ -2,7 +2,7 @@ module View.InfoFooter exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import Msg.Main exposing (Msg)
+import TodoApp.Msg  exposing (Msg)
 
 
 infoFooter : Html Msg

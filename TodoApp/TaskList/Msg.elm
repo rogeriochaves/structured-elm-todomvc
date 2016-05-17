@@ -1,4 +1,4 @@
-module Msg.TaskList exposing (..)
+module TodoApp.TaskList.Msg exposing (..)
 
 
 type Msg

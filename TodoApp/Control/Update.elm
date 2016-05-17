@@ -1,7 +1,7 @@
 module TodoApp.Control.Update exposing (..)
 
-import Msg.Main as Main exposing (..)
-import Msg.Control as Control exposing (..)
+import TodoApp.Msg as Main exposing (..)
+import TodoApp.Control.Msg as Control exposing (..)
 import TodoApp.Control.Model exposing (Model)
 
 
