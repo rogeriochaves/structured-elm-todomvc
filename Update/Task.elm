@@ -7,13 +7,13 @@ import Model.Task exposing (Model, newTask)
 
 
 update : Main.Msg -> Model -> Model
-update actionFor task =
-    case actionFor of
-        MsgForTaskEntry action ->
-            updateTask action task
+update msgFor task =
+    case msgFor of
+        MsgForTaskEntry msg ->
+            updateTask msg task
 
-        MsgForTask _ action ->
-            updateTask action task
+        MsgForTask _ msg ->
+            updateTask msg task
 
         MsgForTaskList (Add id _) ->
             newTask (id + 1) ""
@@ -23,8 +23,8 @@ update actionFor task =
 
 
 updateTask : Task.Msg -> Model -> Model
-updateTask action model =
-    case action of
+updateTask msg model =
+    case msg of
         Check isCompleted ->
             { model | completed = isCompleted }
 
@@ -40,8 +40,8 @@ type alias FocusPort =
 
 
 updateTaskCmd : FocusPort -> Main.Msg -> Cmd Main.Msg
-updateTaskCmd focus action =
-    case action of
+updateTaskCmd focus msg =
+    case msg of
         MsgForTask id (Editing _) ->
             focus ("#todo-" ++ toString id)
 

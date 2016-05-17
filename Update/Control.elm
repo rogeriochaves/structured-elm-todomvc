@@ -6,17 +6,17 @@ import Model.Control exposing (Model)
 
 
 update : Main.Msg -> Model -> Model
-update actionFor control =
-    case actionFor of
-        MsgForControl action ->
-            updateControl action control
+update msgFor control =
+    case msgFor of
+        MsgForControl msg ->
+            updateControl msg control
 
         _ ->
             control
 
 
 updateControl : Control.Msg -> Model -> Model
-updateControl action model =
-    case action of
+updateControl msg model =
+    case msg of
         ChangeVisibility visibility ->
             { model | visibility = visibility }

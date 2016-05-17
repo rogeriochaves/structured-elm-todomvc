@@ -10,21 +10,21 @@ import String
 
 
 update : Main.Msg -> Model -> Model
-update actionFor taskList =
-    case actionFor of
-        MsgForTaskList action ->
-            updateTaskList action taskList
+update msgFor taskList =
+    case msgFor of
+        MsgForTaskList msg ->
+            updateTaskList msg taskList
 
-        MsgForTask id action ->
-            updateTask id action taskList
+        MsgForTask id msg ->
+            updateTask id msg taskList
 
         _ ->
             taskList
 
 
 updateTaskList : TaskList.Msg -> Model -> Model
-updateTaskList action taskList =
-    case action of
+updateTaskList msg taskList =
+    case msg of
         Add id description ->
             if String.isEmpty description then
                 taskList
@@ -46,11 +46,11 @@ updateTaskList action taskList =
 
 
 updateTask : Int -> Task.Msg -> Model -> Model
-updateTask id action taskList =
+updateTask id msg taskList =
     let
         updateTask task =
             if task.id == id then
-                UpdateTask.updateTask action task
+                UpdateTask.updateTask msg task
             else
                 task
     in

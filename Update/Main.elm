@@ -12,21 +12,21 @@ type alias FocusPort =
 
 
 updateWithCmd : FocusPort -> Msg -> Model -> ( Model, Cmd Msg )
-updateWithCmd focus action model =
-    ( update action model, updateCmd focus action )
+updateWithCmd focus msg model =
+    ( update msg model, updateCmd focus msg )
 
 
 update : Msg -> Model -> Model
-update action model =
+update msg model =
     { model
-        | taskEntry = Task.update action model.taskEntry
-        , taskList = TaskList.update action model.taskList
-        , control = Control.update action model.control
+        | taskEntry = Task.update msg model.taskEntry
+        , taskList = TaskList.update msg model.taskList
+        , control = Control.update msg model.control
     }
 
 
 updateCmd : FocusPort -> Msg -> Cmd Msg
-updateCmd focus action =
+updateCmd focus msg =
     Cmd.batch
-        [ Task.updateTaskCmd focus action
+        [ Task.updateTaskCmd focus msg
         ]
