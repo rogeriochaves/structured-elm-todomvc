@@ -1,4 +1,4 @@
-# Structured TodoMVC in Elm
+# Structured Modular TodoMVC in Elm
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
@@ -6,13 +6,15 @@ This is based on the [official TodoMVC Elm example](https://github.com/evancz/el
 
 ## Project Structure
 
-We have four main folders: Action, Model, Update and View.
+In this structure, we have the main folder for the app, called TodoApp, which holds the main Action, Model and Views.
 
-Each one of those folders have a Main.elm file, which combines all other modules, e.g. the TodoApp.Update  is a combination of all other Updates in the project, the TodoApp.Main.Model is a combination of all other models in the project, and so on.
+Each module inside is composed the same way, we have Control, Task and TaskList, each one with their own Action, Model, and Views.
 
-Finally, the root main file, called Todo.elm, uses the Main Update, the Main Model and the Main View to start your app.
+The TodoApp combines all other modules, e.g. the TodoApp.Update is a combination of all other Updates in the project, the TodoApp.Model is a combination of all other models in the project, and so on.
 
-<a href="https://github.com/rogeriochaves/structured-elm-todomvc/tree/modular" style="font-size:22px">Checkout the modularized alternative too</a>
+Finally, the root main file, called Todo.elm, uses the TodoApp Update, the TodoApp Model and the TodoApp View to start your app.
+
+<a href="https://github.com/rogeriochaves/structured-elm-todomvc" style="font-size:22px">Checkout the non-modularized alternative too</a>
 
 ## Build Instructions
 

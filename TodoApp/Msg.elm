@@ -1,4 +1,4 @@
-module TodoApp.Msg  exposing (..)
+module TodoApp.Msg exposing (..)
 
 import TodoApp.TaskList.Msg as TaskList
 import TodoApp.Task.Msg as Task
