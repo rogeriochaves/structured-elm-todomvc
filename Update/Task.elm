@@ -3,7 +3,7 @@ module Update.Task exposing (..)
 import Msg.Main as Main exposing (..)
 import Msg.Task as Task exposing (..)
 import Msg.TaskList exposing (..)
-import Model.Task exposing (Model, newTask)
+import TodoApp.Task.Model exposing (Model, newTask)
 
 
 update : Main.Msg -> Model -> Model

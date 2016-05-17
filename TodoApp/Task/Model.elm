@@ -1,4 +1,4 @@
-module Model.Task exposing (..)
+module TodoApp.Task.Model exposing (..)
 
 
 type alias Model =

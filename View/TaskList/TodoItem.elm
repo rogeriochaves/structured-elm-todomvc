@@ -6,7 +6,7 @@ import Html.Events exposing (..)
 import Msg.Main as Main exposing (..)
 import Msg.Task exposing (..)
 import Msg.TaskList exposing (..)
-import Model.Task as Task
+import TodoApp.Task.Model as Task
 import View.Events exposing (onEnter)
 import Json.Decode as Json
 

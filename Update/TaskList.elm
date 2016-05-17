@@ -3,8 +3,8 @@ module Update.TaskList exposing (..)
 import Msg.Main as Main exposing (..)
 import Msg.Task as Task exposing (..)
 import Msg.TaskList as TaskList exposing (..)
-import Model.Task exposing (newTask)
-import Model.TaskList exposing (Model)
+import TodoApp.Task.Model exposing (newTask)
+import TodoApp.TaskList.Model exposing (Model)
 import Update.Task as UpdateTask
 import String
 

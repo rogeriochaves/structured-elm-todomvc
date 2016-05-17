@@ -1,4 +1,4 @@
-module Model.Control exposing (..)
+module TodoApp.Control.Model exposing (..)
 
 
 type alias Model =

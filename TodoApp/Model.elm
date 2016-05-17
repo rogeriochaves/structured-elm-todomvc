@@ -1,8 +1,8 @@
-module Model.Main exposing (..)
+module TodoApp.Model exposing (..)
 
-import Model.Task as Task
-import Model.TaskList as TaskList
-import Model.Control as Control
+import TodoApp.Task.Model as Task
+import TodoApp.TaskList.Model as TaskList
+import TodoApp.Control.Model as Control
 import Msg.Main exposing (Msg)
 
 

@@ -1,7 +1,7 @@
 port module Todo exposing (..)
 
 import Html.App as App
-import Model.Main exposing (Model, init, withSetStorage)
+import TodoApp.Model exposing (Model, init, withSetStorage)
 import View.Main exposing (view)
 import Update.Main exposing (updateWithCmd)
 

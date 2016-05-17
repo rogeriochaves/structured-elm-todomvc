@@ -1,7 +1,7 @@
 module Update.Main exposing (..)
 
 import Msg.Main exposing (..)
-import Model.Main exposing (Model, initialModel)
+import TodoApp.Model exposing (Model)
 import Update.Task as Task
 import Update.TaskList as TaskList
 import Update.Control as Control

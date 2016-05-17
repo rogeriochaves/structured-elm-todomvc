@@ -4,7 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Lazy exposing (lazy, lazy2)
 import Msg.Main exposing (..)
-import Model.Main exposing (Model)
+import TodoApp.Model exposing (Model)
 import View.TaskList.Main as TaskListView
 import View.TaskEntry as TaskEntryView
 import View.Controls as ControlsView
