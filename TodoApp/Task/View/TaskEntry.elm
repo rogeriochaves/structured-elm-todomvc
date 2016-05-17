@@ -1,4 +1,4 @@
-module View.TaskEntry exposing (..)
+module TodoApp.Task.View.TaskEntry exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -6,7 +6,7 @@ import Html.Events exposing (..)
 import TodoApp.Msg  as Main exposing (..)
 import TodoApp.TaskList.Msg exposing (..)
 import TodoApp.Task.Msg exposing (..)
-import View.Events exposing (onEnter)
+import TodoApp.Task.View.Events exposing (onEnter)
 import TodoApp.Task.Model exposing (Model)
 import Json.Decode as Json
 
