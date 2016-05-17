@@ -1,10 +1,10 @@
-module Update.Main exposing (..)
+module TodoApp.Update  exposing (..)
 
 import Msg.Main exposing (..)
 import TodoApp.Model exposing (Model)
-import Update.Task as Task
-import Update.TaskList as TaskList
-import Update.Control as Control
+import TodoApp.Task.Update as Task
+import TodoApp.TaskList.Update as TaskList
+import TodoApp.Control.Update as Control
 
 
 type alias FocusPort =

@@ -1,4 +1,4 @@
-module Update.Task exposing (..)
+module TodoApp.Task.Update exposing (..)
 
 import Msg.Main as Main exposing (..)
 import Msg.Task as Task exposing (..)

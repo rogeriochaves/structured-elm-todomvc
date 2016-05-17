@@ -1,4 +1,4 @@
-module Update.Control exposing (..)
+module TodoApp.Control.Update exposing (..)
 
 import Msg.Main as Main exposing (..)
 import Msg.Control as Control exposing (..)

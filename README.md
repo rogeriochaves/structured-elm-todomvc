@@ -8,7 +8,7 @@ This is based on the [official TodoMVC Elm example](https://github.com/evancz/el
 
 We have four main folders: Action, Model, Update and View.
 
-Each one of those folders have a Main.elm file, which combines all other modules, e.g. the Update.Main is a combination of all other Updates in the project, the TodoApp.Main.Model is a combination of all other models in the project, and so on.
+Each one of those folders have a Main.elm file, which combines all other modules, e.g. the TodoApp.Update  is a combination of all other Updates in the project, the TodoApp.Main.Model is a combination of all other models in the project, and so on.
 
 Finally, the root main file, called Todo.elm, uses the Main Update, the Main Model and the Main View to start your app.
 
