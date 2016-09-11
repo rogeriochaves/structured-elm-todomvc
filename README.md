@@ -10,7 +10,7 @@ In this structure, we have the main folder for the app, called TodoApp, which ho
 
 Each module inside is composed the same way, we have Control, Task and TaskList, each one with their own Action, Model, and Views.
 
-The TodoApp combines all other modules, e.g. the TodoApp.Update is a combination of all other Updates in the project, the TodoApp.Model is a combination of all other models in the project, and so on.
+The TodoApp combines all other modules, e.g. the App.Update is a combination of all other Updates in the project, the App.Model is a combination of all other models in the project, and so on.
 
 Finally, the root main file, called Todo.elm, uses the TodoApp Update, the TodoApp Model and the TodoApp View to start your app.
 

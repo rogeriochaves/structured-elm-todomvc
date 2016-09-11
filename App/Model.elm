@@ -1,9 +1,9 @@
-module TodoApp.Model exposing (..)
+module App.Model exposing (..)
 
-import TodoApp.Task.Model as Task
-import TodoApp.TaskList.Model as TaskList
-import TodoApp.Control.Model as Control
-import TodoApp.Msg exposing (Msg)
+import App.Task.Model as Task
+import App.TaskList.Model as TaskList
+import App.Control.Model as Control
+import App.Msg exposing (Msg)
 
 
 type alias Model =

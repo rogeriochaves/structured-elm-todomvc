@@ -1,8 +1,8 @@
-module TodoApp.View.InfoFooter exposing (..)
+module App.View.InfoFooter exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import TodoApp.Msg exposing (Msg)
+import App.Msg exposing (Msg)
 
 
 infoFooter : Html Msg

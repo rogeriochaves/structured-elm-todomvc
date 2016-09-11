@@ -1,11 +1,11 @@
-module TodoApp.TaskList.Update exposing (..)
+module App.TaskList.Update exposing (..)
 
-import TodoApp.Msg as Main exposing (..)
-import TodoApp.Task.Msg as Task exposing (..)
-import TodoApp.TaskList.Msg as TaskList exposing (..)
-import TodoApp.Task.Model exposing (newTask)
-import TodoApp.TaskList.Model exposing (Model)
-import TodoApp.Task.Update as UpdateTask
+import App.Msg as Main exposing (..)
+import App.Task.Msg as Task exposing (..)
+import App.TaskList.Msg as TaskList exposing (..)
+import App.Task.Model exposing (newTask)
+import App.TaskList.Model exposing (Model)
+import App.Task.Update as UpdateTask
 import String
 
 

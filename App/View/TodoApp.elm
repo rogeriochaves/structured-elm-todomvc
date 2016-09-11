@@ -1,14 +1,14 @@
-module TodoApp.View.TodoApp exposing (..)
+module App.View.TodoApp exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Lazy exposing (lazy, lazy2)
-import TodoApp.Msg exposing (..)
-import TodoApp.Model exposing (Model)
-import TodoApp.TaskList.View.TaskList as TaskListView
-import TodoApp.Task.View.TaskEntry as TaskEntryView
-import TodoApp.Control.View.Controls as ControlsView
-import TodoApp.View.InfoFooter exposing (infoFooter)
+import App.Msg exposing (..)
+import App.Model exposing (Model)
+import App.TaskList.View.TaskList as TaskListView
+import App.Task.View.TaskEntry as TaskEntryView
+import App.Control.View.Controls as ControlsView
+import App.View.InfoFooter exposing (infoFooter)
 
 
 view : Model -> Html Msg
