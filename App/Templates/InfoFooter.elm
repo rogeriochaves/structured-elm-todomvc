@@ -1,4 +1,4 @@
-module App.View.InfoFooter exposing (..)
+module App.Templates.InfoFooter exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)

@@ -1,4 +1,4 @@
-module App.View.TodoApp exposing (..)
+module App.Templates.Application exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
@@ -8,7 +8,7 @@ import App.Model exposing (Model)
 import App.TaskList.View.TaskList as TaskListView
 import App.Task.View.TaskEntry as TaskEntryView
 import App.Control.View.Controls as ControlsView
-import App.View.InfoFooter exposing (infoFooter)
+import App.Templates.InfoFooter exposing (infoFooter)
 
 
 view : Model -> Html Msg
