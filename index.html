@@ -6,11 +6,15 @@
     <title>Elm • TodoMVC</title>
     <meta name="description" content="A proper implementation of the TodoMVC app">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <script src="assets/elm.js"></script>
-    <script src="assets/ports.js"></script>
     <link rel="stylesheet" href="assets/style.css">
   </head>
   <body>
+    <!-- You cannot put ports.js, which initializes elm, in the <head> tag, otherwise it will run
+        into a bug where I think document.body is undefined.
+        Ember puts scripts at the bottom and that has been a good way to do it for as far as I can remember.
+        It'd be better to keep the scripts together so it's clear where someone might add more scripts.
+        -->
+    <script src="assets/elm.js"></script>
+    <script src="assets/ports.js"></script>
   </body>
 </html>
