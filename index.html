@@ -2,30 +2,13 @@
 <html>
   <script type="text/javascript" src="elm.js"></script>
   <link rel="stylesheet" href="assets/style.css">
-<script type="text/javascript">
-  (function() {
-    var storedState = localStorage.getItem('elm-app-state');
-    var startingState = storedState ? JSON.parse(storedState) : null;
-    var app = Elm.Todo.fullscreen(startingState);
-    app.ports.focus.subscribe(function(selector) {
-      setTimeout(function() {
-        var nodes = document.querySelectorAll(selector);
-        if (nodes.length === 1 && document.activeElement !== nodes[0]) {
-            nodes[0].focus();
-        }
-      }, 50);
-    });
-    app.ports.setStorage.subscribe(function(state) {
-        localStorage.setItem('elm-app-state', JSON.stringify(state));
-    });
-  })();
-</script>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Elm • TodoMVC</title>
     <meta name="description" content="A proper implementation of the TodoMVC app">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="assets/ports.js"></script>
   </head>
   <body>
   </body>
