@@ -37,3 +37,21 @@ Then open `index.html` in your browser!
 Apparently this button will deploy this project to heroku?
 
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+
+
+Right now it's broke, when you try to load index.html, you get this error in elm.js:
+```
+Uncaught TypeError: Cannot read property 'appendChild' of null "@" elm.js:6093 
+  renderer @ elm.js:6093
+  (anonymous function) @ elm.js:3159
+  step @ elm.js:2905
+  work @ elm.js:2963
+  setTimeout (async)enqueue @ elm.js:2950
+  rawSpawn @ elm.js:2785
+  spawnLoop @ elm.js:3290
+  makeEmbedHelp @ elm.js:3179
+  embed @ elm.js:3056
+  fullscreen @ elm.js:3016
+  (anonymous function) @ ports.js:4
+  (anonymous function) @ ports.js:16
+```
