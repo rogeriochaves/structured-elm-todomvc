@@ -1,11 +1,11 @@
-module App.TaskList.Update exposing (..)
+module TaskList.Update exposing (..)
 
-import App.Msg as Main exposing (..)
-import App.Task.Msg as Task exposing (..)
-import App.TaskList.Msg as TaskList exposing (..)
-import App.Task.Model exposing (newTask)
-import App.TaskList.Model exposing (Model)
-import App.Task.Update as UpdateTask
+import Msg as Main exposing (..)
+import Task.Msg as Task exposing (..)
+import TaskList.Msg as TaskList exposing (..)
+import Task.Model exposing (newTask)
+import TaskList.Model exposing (Model)
+import Task.Update as UpdateTask
 import String
 
 

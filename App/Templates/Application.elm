@@ -1,14 +1,14 @@
-module App.Templates.Application exposing (..)
+module Templates.Application exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Lazy exposing (lazy, lazy2)
-import App.Msg exposing (..)
-import App.Model exposing (Model)
-import App.TaskList.View.TaskList as TaskListView
-import App.Task.View.TaskEntry as TaskEntryView
-import App.Control.View.Controls as ControlsView
-import App.Templates.InfoFooter exposing (infoFooter)
+import Msg exposing (..)
+import Model exposing (Model)
+import TaskList.View.TaskList as TaskListView
+import Task.View.TaskEntry as TaskEntryView
+import Control.View.Controls as ControlsView
+import Templates.InfoFooter exposing (infoFooter)
 
 
 view : Model -> Html Msg

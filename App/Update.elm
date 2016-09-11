@@ -1,10 +1,10 @@
-module App.Update exposing (..)
+module Update exposing (..)
 
-import App.Msg exposing (..)
-import App.Model exposing (Model)
-import App.Task.Update as Task
-import App.TaskList.Update as TaskList
-import App.Control.Update as Control
+import Msg exposing (..)
+import Model exposing (Model)
+import Task.Update as Task
+import TaskList.Update as TaskList
+import Control.Update as Control
 
 
 type alias FocusPort =

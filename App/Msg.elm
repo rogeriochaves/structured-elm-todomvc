@@ -1,8 +1,8 @@
-module App.Msg exposing (..)
+module Msg exposing (..)
 
-import App.TaskList.Msg as TaskList
-import App.Task.Msg as Task
-import App.Control.Msg as Control
+import TaskList.Msg as TaskList
+import Task.Msg as Task
+import Control.Msg as Control
 
 
 type Msg

@@ -1,13 +1,13 @@
-module App.Task.View.TaskEntry exposing (..)
+module Task.View.TaskEntry exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import App.Msg as Main exposing (..)
-import App.TaskList.Msg exposing (..)
-import App.Task.Msg exposing (..)
-import App.Task.View.Events exposing (onEnter)
-import App.Task.Model exposing (Model)
+import Msg as Main exposing (..)
+import TaskList.Msg exposing (..)
+import Task.Msg exposing (..)
+import Task.View.Events exposing (onEnter)
+import Task.Model exposing (Model)
 import Json.Decode as Json
 
 

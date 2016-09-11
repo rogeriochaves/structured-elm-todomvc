@@ -1,6 +1,6 @@
-module App.TaskList.Model exposing (..)
+module TaskList.Model exposing (..)
 
-import App.Task.Model as Task
+import Task.Model as Task
 
 
 type alias Model =

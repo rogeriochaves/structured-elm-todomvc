@@ -1,9 +1,9 @@
-module App.Model exposing (..)
+module Model exposing (..)
 
-import App.Task.Model as Task
-import App.TaskList.Model as TaskList
-import App.Control.Model as Control
-import App.Msg exposing (Msg)
+import Task.Model as Task
+import TaskList.Model as TaskList
+import Control.Model as Control
+import Msg exposing (Msg)
 
 
 type alias Model =

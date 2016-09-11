@@ -1,9 +1,9 @@
-module App.Task.Update exposing (..)
+module Task.Update exposing (..)
 
-import App.Msg as Main exposing (..)
-import App.Task.Msg as Task exposing (..)
-import App.TaskList.Msg exposing (..)
-import App.Task.Model exposing (Model, newTask)
+import Msg as Main exposing (..)
+import Task.Msg as Task exposing (..)
+import TaskList.Msg exposing (..)
+import Task.Model exposing (Model, newTask)
 
 
 update : Main.Msg -> Model -> Model

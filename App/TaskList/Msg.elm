@@ -1,4 +1,4 @@
-module App.TaskList.Msg exposing (..)
+module TaskList.Msg exposing (..)
 
 
 type Msg
