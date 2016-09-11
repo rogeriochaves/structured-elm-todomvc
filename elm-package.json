@@ -4,7 +4,7 @@
     "repository": "https://github.com/rogeriochaves/structured-elm-todomvc.git",
     "license": "BSD3",
     "source-directories": [
-        "."
+        "App"
     ],
     "exposed-modules": [],
     "dependencies": {

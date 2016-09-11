@@ -2,7 +2,7 @@
     "name": "TodoMVC in Elm",
     "repository": "https://github.com/evancz/elm-todomvc",
     "env": {
-        "ELM_COMPILE": "elm make Todo.elm"
+        "ELM_COMPILE": "elm make App/Main.elm --output assets/elm.js && echo 'foo'"
     },
     "buildpacks": [
         {

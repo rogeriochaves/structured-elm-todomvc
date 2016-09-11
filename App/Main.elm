@@ -1,14 +1,14 @@
-port module Todo exposing (..)
+port module Main exposing (..)
 
-import Html.App as App
-import App.Model exposing (Model, init, withSetStorage)
-import App.Templates.Application exposing (view)
-import App.Update exposing (updateWithCmd)
+import Html.App as HtmlApp
+import Model exposing (Model, init, withSetStorage)
+import Templates.Application exposing (view)
+import Update exposing (updateWithCmd)
 
 
 main : Program (Maybe Model)
 main =
-    App.programWithFlags
+    HtmlApp.programWithFlags
         { init = init
         , view = view
         , update = (\msg model -> withSetStorage setStorage (updateWithCmd focus msg model))
