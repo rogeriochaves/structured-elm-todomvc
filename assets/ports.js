@@ -1,8 +1,6 @@
 (function() {
   var storedState = localStorage.getItem('elm-app-state');
-  console.log('storedState', storedState);
   var startingState = storedState ? JSON.parse(storedState) : null;
-  console.log('Elm:', Elm)
   var app = Elm.Main.fullscreen(startingState);
   app.ports.focus.subscribe(function(selector) {
     setTimeout(function() {
