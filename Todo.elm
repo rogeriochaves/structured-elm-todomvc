@@ -11,12 +11,9 @@ main =
     App.programWithFlags
         { init = init
         , view = view
-        , update = (\msg model -> withSetStorage setStorage (updateWithCmd focus msg model))
+        , update = (\msg model -> withSetStorage setStorage (updateWithCmd msg model))
         , subscriptions = \_ -> Sub.none
         }
 
 
 port setStorage : Model -> Cmd msg
-
-
-port focus : String -> Cmd msg

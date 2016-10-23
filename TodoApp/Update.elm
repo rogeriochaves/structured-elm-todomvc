@@ -11,9 +11,9 @@ type alias FocusPort =
     String -> Cmd Msg
 
 
-updateWithCmd : FocusPort -> Msg -> Model -> ( Model, Cmd Msg )
-updateWithCmd focus msg model =
-    ( update msg model, updateCmd focus msg )
+updateWithCmd : Msg -> Model -> ( Model, Cmd Msg )
+updateWithCmd msg model =
+    ( update msg model, updateCmd msg )
 
 
 update : Msg -> Model -> Model
@@ -25,8 +25,8 @@ update msg model =
     }
 
 
-updateCmd : FocusPort -> Msg -> Cmd Msg
-updateCmd focus msg =
+updateCmd : Msg -> Cmd Msg
+updateCmd msg =
     Cmd.batch
-        [ Task.updateTaskCmd focus msg
+        [ Task.updateTaskCmd msg
         ]

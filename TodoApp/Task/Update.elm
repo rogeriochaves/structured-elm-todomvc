@@ -1,9 +1,11 @@
 module TodoApp.Task.Update exposing (..)
 
+import Dom
 import TodoApp.Msg as Main exposing (..)
 import TodoApp.Task.Msg as Task exposing (..)
 import TodoApp.TaskList.Msg exposing (..)
 import TodoApp.Task.Model exposing (Model, newTask)
+import Task exposing (perform)
 
 
 update : Main.Msg -> Model -> Model
@@ -39,11 +41,15 @@ type alias FocusPort =
     String -> Cmd Main.Msg
 
 
-updateTaskCmd : FocusPort -> Main.Msg -> Cmd Main.Msg
-updateTaskCmd focus msg =
+updateTaskCmd : Main.Msg -> Cmd Main.Msg
+updateTaskCmd msg =
     case msg of
         MsgForTask id (Editing _) ->
-            focus ("#todo-" ++ toString id)
+            let
+                focus =
+                    Dom.focus ("todo-" ++ toString id)
+            in
+                perform (\_ -> NoOp) (\_ -> NoOp) focus
 
         _ ->
             Cmd.none
