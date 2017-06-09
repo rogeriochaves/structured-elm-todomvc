@@ -3,12 +3,12 @@ module View.TaskList.TodoItem exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
+import Json.Decode as Json
+import Model.Task as Task
 import Msg.Main as Main exposing (..)
 import Msg.Task exposing (..)
 import Msg.TaskList exposing (..)
-import Model.Task as Task
 import View.Events exposing (onEnter)
-import Json.Decode as Json
 
 
 todoItem : Task.Model -> Html Main.Msg
@@ -17,7 +17,7 @@ todoItem todo =
         [ div [ class "view" ]
             [ input
                 [ class "toggle"
-                , type' "checkbox"
+                , type_ "checkbox"
                 , checked todo.completed
                 , onClick (MsgForTask todo.id <| Check (not todo.completed))
                 ]

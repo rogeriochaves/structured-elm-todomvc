@@ -14,4 +14,4 @@ onEnter fail success =
             else
                 fail
     in
-        on "keyup" (Json.map tagger keyCode)
+    on "keyup" (Json.map tagger keyCode)

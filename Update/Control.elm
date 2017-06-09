@@ -1,8 +1,8 @@
 module Update.Control exposing (..)
 
-import Msg.Main as Main exposing (..)
-import Msg.Control as Control exposing (..)
 import Model.Control exposing (Model)
+import Msg.Control as Control exposing (..)
+import Msg.Main as Main exposing (..)
 
 
 update : Main.Msg -> Model -> Model

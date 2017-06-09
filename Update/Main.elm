@@ -1,10 +1,10 @@
 module Update.Main exposing (..)
 
-import Msg.Main exposing (..)
 import Model.Main exposing (Model, initialModel)
+import Msg.Main exposing (..)
+import Update.Control as Control
 import Update.Task as Task
 import Update.TaskList as TaskList
-import Update.Control as Control
 
 
 type alias FocusPort =

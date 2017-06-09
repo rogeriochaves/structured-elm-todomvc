@@ -3,12 +3,12 @@ module View.TaskEntry exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Msg.Main as Main exposing (..)
-import Msg.TaskList exposing (..)
-import Msg.Task exposing (..)
-import View.Events exposing (onEnter)
-import Model.Task exposing (Model)
 import Json.Decode as Json
+import Model.Task exposing (Model)
+import Msg.Main as Main exposing (..)
+import Msg.Task exposing (..)
+import Msg.TaskList exposing (..)
+import View.Events exposing (onEnter)
 
 
 taskEntry : Model -> Html Main.Msg

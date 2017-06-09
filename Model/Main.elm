@@ -1,8 +1,8 @@
 module Model.Main exposing (..)
 
+import Model.Control as Control
 import Model.Task as Task
 import Model.TaskList as TaskList
-import Model.Control as Control
 import Msg.Main exposing (Msg)
 
 
