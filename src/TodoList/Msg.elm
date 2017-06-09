@@ -4,5 +4,5 @@ module TodoList.Msg exposing (..)
 type Msg
     = Add Int String
     | Delete Int
-    | DeleteComplete
+    | DeleteCompleted
     | CheckAll Bool

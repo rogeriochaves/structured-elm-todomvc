@@ -34,7 +34,7 @@ updateTodoList msg todoList =
         Delete id ->
             List.filter (\t -> t.id /= id) todoList
 
-        DeleteComplete ->
+        DeleteCompleted ->
             List.filter (not << .completed) todoList
 
         CheckAll isCompleted ->
