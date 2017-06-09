@@ -1,4 +1,4 @@
-module View.Controls exposing (..)
+module Control.View exposing (..)
 
 import Control exposing (..)
 import Html exposing (..)

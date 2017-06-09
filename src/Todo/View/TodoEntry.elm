@@ -1,12 +1,12 @@
-module View.Todo.TodoEntry exposing (..)
+module Todo.View.TodoEntry exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
-import Todo.Model as Todo
 import Todo exposing (..)
-import View.Todo.Events exposing (onEnter)
+import Todo.Model as Todo
+import Todo.View.Events exposing (onEnter)
 
 
 todoEntry : Todo.Model -> Html Msg

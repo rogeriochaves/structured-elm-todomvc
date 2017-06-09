@@ -1,16 +1,16 @@
 module App exposing (..)
 
 import Control as Control
+import Control.View as ControlsView
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Lazy exposing (lazy, lazy2)
+import Layout.InfoFooter exposing (infoFooter)
 import Model exposing (..)
 import Todo as Todo
+import Todo.View.TodoEntry as TodoEntryView
 import TodoList as TodoList
-import View.Controls as ControlsView
-import View.InfoFooter exposing (infoFooter)
-import View.Todo.TodoEntry as TodoEntryView
-import View.TodoList as TodoListView
+import TodoList.View.TodoList as TodoListView
 
 
 init : Maybe Model -> ( Model, Cmd Msg )

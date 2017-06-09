@@ -1,11 +1,11 @@
-module View.TodoList exposing (..)
+module TodoList.View.TodoList exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Todo.Model as Todo
+import Todo.View.TodoItem exposing (todoItem)
 import TodoList exposing (..)
-import View.Todo.TodoItem exposing (todoItem)
 
 
 todoList : String -> List Todo.Model -> Html Msg
