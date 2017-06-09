@@ -32,14 +32,14 @@ update msg model =
             { model | description = description }
 
         Add id description ->
-            newTodo id ""
+            newTodo (id + 1) ""
 
 
 updateOutMsg : Msg -> Model -> OutMsg
 updateOutMsg msg model =
     case msg of
         Add id description ->
-            TodoListAdd id description
+            TodoListAdd (id + 1) description
 
         _ ->
             OutNoOp

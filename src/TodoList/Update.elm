@@ -14,11 +14,6 @@ type Msg
     | MsgForTodo Int Todo.Update.Msg
 
 
-type OutMsg
-    = OutNoOp
-    | NewTodoEntry Int
-
-
 update : Msg -> Model -> Model
 update msgFor todoList =
     case msgFor of
@@ -72,16 +67,3 @@ updateCmd focus msg =
 
         _ ->
             Cmd.none
-
-
-updateOutMsg : Msg -> Model -> OutMsg
-updateOutMsg msgFor todoList =
-    case msgFor of
-        Add id description ->
-            if String.isEmpty description then
-                OutNoOp
-            else
-                NewTodoEntry (id + 1)
-
-        _ ->
-            OutNoOp

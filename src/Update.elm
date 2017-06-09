@@ -56,12 +56,7 @@ updateOutMsg msg model =
                     update (MsgForTodoList <| TodoList.Add id description) model
 
         MsgForTodoList msg_ ->
-            case TodoList.updateOutMsg msg_ model.todoList of
-                TodoList.OutNoOp ->
-                    model
-
-                TodoList.NewTodoEntry id ->
-                    update (MsgForTodoEntry <| Todo.Add id "") model
+            model
 
 
 updateCmd : FocusPort -> Msg -> Cmd Msg
