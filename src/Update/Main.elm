@@ -18,11 +18,22 @@ updateWithCmd focus msg model =
 
 update : Msg -> Model -> Model
 update msg model =
-    { model
-        | todoEntry = Todo.update msg model.todoEntry
-        , todoList = TodoList.update msg model.todoList
-        , control = Control.update msg model.control
-    }
+    let
+        model_ =
+            { model | todoEntry = Todo.update msg model.todoEntry }
+    in
+    case msg of
+        NoOp ->
+            model_
+
+        MsgForControl msg_ ->
+            { model_ | control = Control.update msg_ model_.control }
+
+        MsgForTodoList msg_ ->
+            { model_ | todoList = TodoList.update msg_ model_.todoList }
+
+        MsgForTodoEntry _ ->
+            model_
 
 
 updateCmd : FocusPort -> Msg -> Cmd Msg

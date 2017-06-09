@@ -9,18 +9,8 @@ import String
 import Update.Todo as UpdateTodo
 
 
-update : Main.Msg -> Model -> Model
-update msgFor todoList =
-    case msgFor of
-        MsgForTodoList msg ->
-            updateTodoList msg todoList
-
-        _ ->
-            todoList
-
-
-updateTodoList : TodoList.Msg -> Model -> Model
-updateTodoList msg todoList =
+update : TodoList.Msg -> Model -> Model
+update msg todoList =
     case msg of
         Add id description ->
             if String.isEmpty description then
