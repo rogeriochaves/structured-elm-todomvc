@@ -1,8 +1,7 @@
 port module Todo exposing (..)
 
 import Html
-import TodoApp.Msg exposing (Msg)
-import TodoApp.Update exposing (Model, init, updateWithCmd, view, withSetStorage)
+import TodoApp.Update exposing (Model, Msg, init, updateWithCmd, view, withSetStorage)
 
 
 main : Program (Maybe Model) Model Msg

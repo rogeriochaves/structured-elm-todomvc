@@ -2,10 +2,9 @@ module TodoApp.View.InfoFooter exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
-import TodoApp.Msg exposing (Msg)
 
 
-infoFooter : Html Msg
+infoFooter : Html a
 infoFooter =
     footer [ id "info" ]
         [ p [] [ text "Double-click to edit a todo" ]

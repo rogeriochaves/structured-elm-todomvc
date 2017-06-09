@@ -3,13 +3,12 @@ module TodoApp.View.TaskList exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import TodoApp.Msg as Main exposing (..)
 import TodoApp.Task as Task
 import TodoApp.TaskList exposing (..)
 import TodoApp.View.Task.TodoItem exposing (todoItem)
 
 
-taskList : String -> List Task.Model -> Html Main.Msg
+taskList : String -> List Task.Model -> Html Msg
 taskList visibility tasks =
     let
         isVisible todo =
@@ -41,7 +40,7 @@ taskList visibility tasks =
             , type_ "checkbox"
             , name "toggle"
             , checked allCompleted
-            , onClick (MsgForTaskList <| CheckAll (not allCompleted))
+            , onClick (CheckAll (not allCompleted))
             ]
             []
         , label [ for "toggle-all" ]

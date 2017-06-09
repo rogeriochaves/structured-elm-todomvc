@@ -24,23 +24,32 @@ model =
 
 
 type Msg
-    = Check Bool
+    = NoOp
+    | Check Bool
     | Editing Bool
     | Update String
-    | New Int
+    | Add Int String
 
 
-update : Msg -> Model -> Model
+type OutMsg
+    = OutNoOp
+    | TaskListAdd Int String
+
+
+update : Msg -> Model -> ( Model, OutMsg )
 update msg model =
     case msg of
+        NoOp ->
+            ( model, OutNoOp )
+
         Check isCompleted ->
-            { model | completed = isCompleted }
+            ( { model | completed = isCompleted }, OutNoOp )
 
         Editing isEditing ->
-            { model | editing = isEditing }
+            ( { model | editing = isEditing }, OutNoOp )
 
         Update description ->
-            { model | description = description }
+            ( { model | description = description }, OutNoOp )
 
-        New id ->
-            newTask id ""
+        Add id description ->
+            ( newTask id "", TaskListAdd id description )

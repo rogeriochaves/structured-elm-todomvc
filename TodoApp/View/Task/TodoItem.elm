@@ -4,13 +4,12 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
-import TodoApp.Msg as Main exposing (..)
-import TodoApp.Task as Task exposing (..)
+import TodoApp.Task as Task exposing (Msg(..))
 import TodoApp.TaskList exposing (..)
 import TodoApp.View.Task.Events exposing (onEnter)
 
 
-todoItem : Task.Model -> Html Main.Msg
+todoItem : Task.Model -> Html TodoApp.TaskList.Msg
 todoItem todo =
     li [ classList [ ( "completed", todo.completed ), ( "editing", todo.editing ) ] ]
         [ div [ class "view" ]
@@ -18,14 +17,14 @@ todoItem todo =
                 [ class "toggle"
                 , type_ "checkbox"
                 , checked todo.completed
-                , onClick (MsgForTaskList <| MsgForTask todo.id <| Check (not todo.completed))
+                , onClick (MsgForTask todo.id <| Check (not todo.completed))
                 ]
                 []
-            , label [ onDoubleClick (MsgForTaskList <| MsgForTask todo.id <| Editing True) ]
+            , label [ onDoubleClick (MsgForTask todo.id <| Editing True) ]
                 [ text todo.description ]
             , button
                 [ class "destroy"
-                , onClick (MsgForTaskList <| Delete todo.id)
+                , onClick (Delete todo.id)
                 ]
                 []
             ]
@@ -34,9 +33,9 @@ todoItem todo =
             , value todo.description
             , name "title"
             , id ("todo-" ++ toString todo.id)
-            , on "input" (Json.map (MsgForTaskList << MsgForTask todo.id << Update) targetValue)
-            , onBlur (MsgForTaskList <| MsgForTask todo.id <| Editing False)
-            , onEnter Main.NoOp (MsgForTaskList <| MsgForTask todo.id <| Editing False)
+            , on "input" (Json.map (MsgForTask todo.id << Update) targetValue)
+            , onBlur (MsgForTask todo.id <| Editing False)
+            , onEnter TodoApp.TaskList.NoOp (MsgForTask todo.id <| Editing False)
             ]
             []
         ]

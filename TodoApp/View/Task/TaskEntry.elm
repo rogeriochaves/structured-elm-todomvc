@@ -4,13 +4,11 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
-import TodoApp.Msg as Main exposing (..)
 import TodoApp.Task as Task exposing (..)
-import TodoApp.TaskList exposing (..)
 import TodoApp.View.Task.Events exposing (onEnter)
 
 
-taskEntry : Task.Model -> Html Main.Msg
+taskEntry : Task.Model -> Html Msg
 taskEntry taskEntry =
     header [ id "header" ]
         [ h1 [] [ text "todos" ]
@@ -20,8 +18,8 @@ taskEntry taskEntry =
             , autofocus True
             , value taskEntry.description
             , name "newTodo"
-            , on "input" (Json.map (MsgForTaskEntry << Update) targetValue)
-            , onEnter Main.NoOp (MsgForTaskList <| Add taskEntry.id taskEntry.description)
+            , on "input" (Json.map Update targetValue)
+            , onEnter NoOp (Add taskEntry.id taskEntry.description)
             ]
             []
         ]
