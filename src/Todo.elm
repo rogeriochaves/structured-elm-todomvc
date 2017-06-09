@@ -1,4 +1,4 @@
-module TodoApp.Task exposing (..)
+module Todo exposing (..)
 
 
 type alias Model =
@@ -9,8 +9,8 @@ type alias Model =
     }
 
 
-newTask : Int -> String -> Model
-newTask id description =
+newTodo : Int -> String -> Model
+newTodo id description =
     { description = description
     , completed = False
     , editing = False
@@ -20,7 +20,7 @@ newTask id description =
 
 model : Model
 model =
-    newTask 1 ""
+    newTodo 1 ""
 
 
 type Msg
@@ -33,7 +33,7 @@ type Msg
 
 type OutMsg
     = OutNoOp
-    | TaskListAdd Int String
+    | TodoListAdd Int String
 
 
 update : Msg -> Model -> ( Model, OutMsg )
@@ -52,4 +52,4 @@ update msg model =
             ( { model | description = description }, OutNoOp )
 
         Add id description ->
-            ( newTask id "", TaskListAdd id description )
+            ( newTodo id "", TodoListAdd id description )

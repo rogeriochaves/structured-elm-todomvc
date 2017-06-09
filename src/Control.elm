@@ -1,4 +1,4 @@
-module TodoApp.Control exposing (..)
+module Control exposing (..)
 
 
 type alias Model =
@@ -19,7 +19,7 @@ type Msg
 
 type OutMsg
     = NoOp
-    | TaskListDeleteComplete
+    | TodoListDeleteComplete
 
 
 update : Msg -> Model -> Model

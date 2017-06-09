@@ -1,15 +1,15 @@
-module TodoApp.View.TaskList exposing (..)
+module View.TodoList exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import TodoApp.Task as Task
-import TodoApp.TaskList exposing (..)
-import TodoApp.View.Task.TodoItem exposing (todoItem)
+import Todo as Todo
+import TodoList exposing (..)
+import View.Todo.TodoItem exposing (todoItem)
 
 
-taskList : String -> List Task.Model -> Html Msg
-taskList visibility tasks =
+todoList : String -> List Todo.Model -> Html Msg
+todoList visibility todos =
     let
         isVisible todo =
             case visibility of
@@ -23,10 +23,10 @@ taskList visibility tasks =
                     True
 
         allCompleted =
-            List.all .completed tasks
+            List.all .completed todos
 
         cssVisibility =
-            if List.isEmpty tasks then
+            if List.isEmpty todos then
                 "hidden"
             else
                 "visible"
@@ -46,5 +46,5 @@ taskList visibility tasks =
         , label [ for "toggle-all" ]
             [ text "Mark all as complete" ]
         , ul [ id "todo-list" ]
-            (List.map todoItem (List.filter isVisible tasks))
+            (List.map todoItem (List.filter isVisible todos))
         ]

@@ -1,28 +1,28 @@
-module TodoApp.Update exposing (..)
+module App exposing (..)
 
+import Control as Control
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Lazy exposing (lazy, lazy2)
-import TodoApp.Control as Control
-import TodoApp.Task as Task
-import TodoApp.TaskList as TaskList
-import TodoApp.View.Controls as ControlsView
-import TodoApp.View.InfoFooter exposing (infoFooter)
-import TodoApp.View.Task.TaskEntry as TaskEntryView
-import TodoApp.View.TaskList as TaskListView
+import Todo as Todo
+import TodoList as TodoList
+import View.Controls as ControlsView
+import View.InfoFooter exposing (infoFooter)
+import View.Todo.TodoEntry as TodoEntryView
+import View.TodoList as TodoListView
 
 
 type alias Model =
-    { taskEntry : Task.Model
-    , taskList : TaskList.Model
+    { todoEntry : Todo.Model
+    , todoList : TodoList.Model
     , control : Control.Model
     }
 
 
 initialModel : Model
 initialModel =
-    { taskEntry = Task.model
-    , taskList = TaskList.model
+    { todoEntry = Todo.model
+    , todoList = TodoList.model
     , control = Control.model
     }
 
@@ -41,8 +41,8 @@ withSetStorage setStorage ( model, cmds ) =
 
 
 type Msg
-    = MsgForTaskEntry Task.Msg
-    | MsgForTaskList TaskList.Msg
+    = MsgForTodoEntry Todo.Msg
+    | MsgForTodoList TodoList.Msg
     | MsgForControl Control.Msg
 
 
@@ -61,42 +61,42 @@ update msg model =
         MsgForControl msg_ ->
             { model | control = Control.update msg_ model.control }
 
-        MsgForTaskEntry msg_ ->
+        MsgForTodoEntry msg_ ->
             let
-                ( taskEntry, outMsg ) =
-                    Task.update msg_ model.taskEntry
+                ( todoEntry, outMsg ) =
+                    Todo.update msg_ model.todoEntry
 
                 model_ =
-                    { model | taskEntry = taskEntry }
+                    { model | todoEntry = todoEntry }
             in
             case outMsg of
-                Task.OutNoOp ->
+                Todo.OutNoOp ->
                     model_
 
-                Task.TaskListAdd id description ->
-                    update (MsgForTaskList <| TaskList.Add id description) model_
+                Todo.TodoListAdd id description ->
+                    update (MsgForTodoList <| TodoList.Add id description) model_
 
-        MsgForTaskList msg_ ->
+        MsgForTodoList msg_ ->
             let
-                ( taskList, outMsg ) =
-                    TaskList.update msg_ model.taskList
+                ( todoList, outMsg ) =
+                    TodoList.update msg_ model.todoList
 
                 model_ =
-                    { model | taskList = taskList }
+                    { model | todoList = todoList }
             in
             case outMsg of
-                TaskList.OutNoOp ->
+                TodoList.OutNoOp ->
                     model_
 
-                TaskList.NewTaskEntry id ->
-                    update (MsgForTaskEntry <| Task.Add id "") model_
+                TodoList.NewTodoEntry id ->
+                    update (MsgForTodoEntry <| Todo.Add id "") model_
 
 
 updateCmd : FocusPort -> Msg -> Cmd Msg
 updateCmd focus msg =
     case msg of
-        MsgForTaskList msg_ ->
-            TaskList.updateTaskCmd focus msg_
+        MsgForTodoList msg_ ->
+            TodoList.updateTodoCmd focus msg_
 
         _ ->
             Cmd.none
@@ -105,11 +105,11 @@ updateCmd focus msg =
 view : Model -> Html Msg
 view model =
     let
-        taskList =
-            model.taskList
+        todoList =
+            model.todoList
 
-        taskEntry =
-            model.taskEntry
+        todoEntry =
+            model.todoEntry
 
         control =
             model.control
@@ -119,9 +119,9 @@ view model =
         , style [ ( "visibility", "hidden" ) ]
         ]
         [ section [ id "todoapp" ]
-            [ Html.map MsgForTaskEntry <| lazy TaskEntryView.taskEntry taskEntry
-            , Html.map MsgForTaskList <| lazy2 TaskListView.taskList control.visibility taskList
-            , Html.map MsgForControl <| lazy2 ControlsView.controls control.visibility taskList
+            [ Html.map MsgForTodoEntry <| lazy TodoEntryView.todoEntry todoEntry
+            , Html.map MsgForTodoList <| lazy2 TodoListView.todoList control.visibility todoList
+            , Html.map MsgForControl <| lazy2 ControlsView.controls control.visibility todoList
             ]
         , infoFooter
         ]

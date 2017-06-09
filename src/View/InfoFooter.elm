@@ -1,4 +1,4 @@
-module TodoApp.View.InfoFooter exposing (..)
+module View.InfoFooter exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)

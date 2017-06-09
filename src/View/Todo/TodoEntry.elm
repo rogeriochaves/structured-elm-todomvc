@@ -1,25 +1,25 @@
-module TodoApp.View.Task.TaskEntry exposing (..)
+module View.Todo.TodoEntry exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
-import TodoApp.Task as Task exposing (..)
-import TodoApp.View.Task.Events exposing (onEnter)
+import Todo as Todo exposing (..)
+import View.Todo.Events exposing (onEnter)
 
 
-taskEntry : Task.Model -> Html Msg
-taskEntry taskEntry =
+todoEntry : Todo.Model -> Html Msg
+todoEntry todoEntry =
     header [ id "header" ]
         [ h1 [] [ text "todos" ]
         , input
             [ id "new-todo"
             , placeholder "What needs to be done?"
             , autofocus True
-            , value taskEntry.description
+            , value todoEntry.description
             , name "newTodo"
             , on "input" (Json.map Update targetValue)
-            , onEnter NoOp (Add taskEntry.id taskEntry.description)
+            , onEnter NoOp (Add todoEntry.id todoEntry.description)
             ]
             []
         ]

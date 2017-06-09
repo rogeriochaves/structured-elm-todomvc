@@ -1,33 +1,33 @@
-module TodoApp.View.Controls exposing (..)
+module View.Controls exposing (..)
 
+import Control exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import TodoApp.Control exposing (..)
-import TodoApp.Task as Task
+import Todo as Todo
 
 
-controls : String -> List Task.Model -> Html Msg
-controls visibility tasks =
+controls : String -> List Todo.Model -> Html Msg
+controls visibility todos =
     let
-        tasksCompleted =
-            List.length (List.filter .completed tasks)
+        todosCompleted =
+            List.length (List.filter .completed todos)
 
-        tasksLeft =
-            List.length tasks - tasksCompleted
+        todosLeft =
+            List.length todos - todosCompleted
 
         item_ =
-            if tasksLeft == 1 then
+            if todosLeft == 1 then
                 " item"
             else
                 " items"
     in
     footer
         [ id "footer"
-        , hidden (List.isEmpty tasks)
+        , hidden (List.isEmpty todos)
         ]
         [ span [ id "todo-count" ]
-            [ strong [] [ text (toString tasksLeft) ]
+            [ strong [] [ text (toString todosLeft) ]
             , text (item_ ++ " left")
             ]
         , ul [ id "filters" ]
@@ -40,14 +40,14 @@ controls visibility tasks =
         , button
             [ class "clear-completed"
             , id "clear-completed"
-            , hidden (tasksCompleted == 0)
+            , hidden (todosCompleted == 0)
             , onClick DeleteComplete
             ]
-            [ text ("Clear completed (" ++ toString tasksCompleted ++ ")") ]
+            [ text ("Clear completed (" ++ toString todosCompleted ++ ")") ]
         ]
 
 
-visibilitySwap : String -> String -> String -> Html TodoApp.Control.Msg
+visibilitySwap : String -> String -> String -> Html Control.Msg
 visibilitySwap uri visibility actualVisibility =
     li [ onClick (ChangeVisibility visibility) ]
         [ a [ href uri, classList [ ( "selected", visibility == actualVisibility ) ] ] [ text visibility ] ]
