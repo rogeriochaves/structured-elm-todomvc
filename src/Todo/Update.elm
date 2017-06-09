@@ -1,9 +1,10 @@
 module Todo.Update exposing (..)
 
+import Task
 import Todo.Model exposing (..)
 
 
-type Msg
+type InternalMsg
     = NoOp
     | Check Bool
     | Editing Bool
@@ -12,11 +13,35 @@ type Msg
 
 
 type OutMsg
-    = OutNoOp
-    | TodoListAdd Int String
+    = TodoListAdd Int String
 
 
-update : Msg -> Model -> Model
+type Msg
+    = ForSelf InternalMsg
+    | ForParent OutMsg
+
+
+type alias TranslationDictionary msg =
+    { onInternalMessage : InternalMsg -> msg
+    , onTodoListAdd : Int -> String -> msg
+    }
+
+
+type alias Translator msg =
+    Msg -> msg
+
+
+translator : TranslationDictionary msg -> Translator msg
+translator { onInternalMessage, onTodoListAdd } msg =
+    case msg of
+        ForSelf internal ->
+            onInternalMessage internal
+
+        ForParent (TodoListAdd id description) ->
+            onTodoListAdd id description
+
+
+update : InternalMsg -> Model -> Model
 update msg model =
     case msg of
         NoOp ->
@@ -35,11 +60,11 @@ update msg model =
             newTodo id ""
 
 
-updateOutMsg : Msg -> Model -> OutMsg
-updateOutMsg msg model =
+updateCmd : InternalMsg -> Cmd Msg
+updateCmd msg =
     case msg of
         Add id description ->
-            TodoListAdd id description
+            Task.perform ForParent (Task.succeed <| TodoListAdd id description)
 
         _ ->
-            OutNoOp
+            Cmd.none

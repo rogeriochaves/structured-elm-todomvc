@@ -7,7 +7,7 @@ import TodoList.Update as TodoList
 
 
 type Msg
-    = MsgForTodoEntry Todo.Msg
+    = MsgForTodoEntry Todo.InternalMsg
     | MsgForTodoList TodoList.Msg
     | MsgForControl Control.InternalMsg
 
@@ -43,12 +43,7 @@ updateOutMsg msg model =
             model
 
         MsgForTodoEntry msg_ ->
-            case Todo.updateOutMsg msg_ model.todoEntry of
-                Todo.OutNoOp ->
-                    model
-
-                Todo.TodoListAdd id description ->
-                    update (MsgForTodoList <| TodoList.Add id description) model
+            model
 
         MsgForTodoList msg_ ->
             case TodoList.updateOutMsg msg_ model.todoList of
@@ -66,11 +61,12 @@ updateCmd focus msg =
             Control.updateCmd msg_
                 |> Cmd.map controlTranslator
 
+        MsgForTodoEntry msg_ ->
+            Todo.updateCmd msg_
+                |> Cmd.map todoTranslator
+
         MsgForTodoList msg_ ->
             TodoList.updateCmd focus msg_
-
-        _ ->
-            Cmd.none
 
 
 controlTranslator : Control.Translator Msg
@@ -78,4 +74,12 @@ controlTranslator =
     Control.translator
         { onInternalMessage = MsgForControl
         , onDeleteCompleted = MsgForTodoList TodoList.DeleteCompleted
+        }
+
+
+todoTranslator : Todo.Translator Msg
+todoTranslator =
+    Todo.translator
+        { onInternalMessage = MsgForTodoEntry
+        , onTodoListAdd = \id description -> MsgForTodoList <| TodoList.Add id description
         }

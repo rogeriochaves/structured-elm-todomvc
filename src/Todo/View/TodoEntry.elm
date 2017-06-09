@@ -4,8 +4,8 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
-import Todo.Update exposing (..)
 import Todo.Model as Todo
+import Todo.Update exposing (..)
 import Todo.View.Events exposing (onEnter)
 
 
@@ -19,8 +19,8 @@ todoEntry todoEntry =
             , autofocus True
             , value todoEntry.description
             , name "newTodo"
-            , on "input" (Json.map Update targetValue)
-            , onEnter NoOp (Add todoEntry.id todoEntry.description)
+            , on "input" (Json.map (ForSelf << Update) targetValue)
+            , onEnter (ForSelf NoOp) (ForSelf <| Add todoEntry.id todoEntry.description)
             ]
             []
         ]

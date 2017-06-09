@@ -11,7 +11,7 @@ type Msg
     | Delete Int
     | DeleteCompleted
     | CheckAll Bool
-    | MsgForTodo Int Todo.Update.Msg
+    | MsgForTodo Int Todo.Update.InternalMsg
 
 
 type OutMsg
@@ -48,7 +48,7 @@ update msgFor todoList =
             updateTodo id msg todoList
 
 
-updateTodo : Int -> Todo.Update.Msg -> Model -> Model
+updateTodo : Int -> Todo.Update.InternalMsg -> Model -> Model
 updateTodo id msg todoList =
     let
         updateTodo todo =
