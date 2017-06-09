@@ -19,7 +19,7 @@ Finally, the root main file, called Todo.elm, uses the Main Update, the Main Mod
 Run the following command from the root of this project:
 
 ```bash
-elm-make Todo.elm --output elm.js
+elm-make Main.elm --output elm.js
 ```
 
 Then open `index.html` in your browser!

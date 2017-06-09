@@ -1,17 +1,17 @@
-module View.TaskList.TodoItem exposing (..)
+module View.TodoList.TodoItem exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
-import Model.Task as Task
+import Model.Todo as Todo
 import Msg.Main as Main exposing (..)
-import Msg.Task exposing (..)
-import Msg.TaskList exposing (..)
+import Msg.Todo exposing (..)
+import Msg.TodoList exposing (..)
 import View.Events exposing (onEnter)
 
 
-todoItem : Task.Model -> Html Main.Msg
+todoItem : Todo.Model -> Html Main.Msg
 todoItem todo =
     li [ classList [ ( "completed", todo.completed ), ( "editing", todo.editing ) ] ]
         [ div [ class "view" ]
@@ -19,14 +19,14 @@ todoItem todo =
                 [ class "toggle"
                 , type_ "checkbox"
                 , checked todo.completed
-                , onClick (MsgForTask todo.id <| Check (not todo.completed))
+                , onClick (MsgForTodo todo.id <| Check (not todo.completed))
                 ]
                 []
-            , label [ onDoubleClick (MsgForTask todo.id <| Editing True) ]
+            , label [ onDoubleClick (MsgForTodo todo.id <| Editing True) ]
                 [ text todo.description ]
             , button
                 [ class "destroy"
-                , onClick (MsgForTaskList <| Delete todo.id)
+                , onClick (MsgForTodoList <| Delete todo.id)
                 ]
                 []
             ]
@@ -35,9 +35,9 @@ todoItem todo =
             , value todo.description
             , name "title"
             , id ("todo-" ++ toString todo.id)
-            , on "input" (Json.map (MsgForTask todo.id << Update) targetValue)
-            , onBlur (MsgForTask todo.id <| Editing False)
-            , onEnter NoOp (MsgForTask todo.id <| Editing False)
+            , on "input" (Json.map (MsgForTodo todo.id << Update) targetValue)
+            , onBlur (MsgForTodo todo.id <| Editing False)
+            , onEnter NoOp (MsgForTodo todo.id <| Editing False)
             ]
             []
         ]

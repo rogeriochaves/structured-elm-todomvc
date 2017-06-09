@@ -1,4 +1,4 @@
-port module Todo exposing (..)
+port module Main exposing (..)
 
 import Html
 import Model.Main exposing (Model, init, withSetStorage)

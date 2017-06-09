@@ -7,18 +7,18 @@ import Model.Main exposing (Model)
 import Msg.Main exposing (..)
 import View.Controls as ControlsView
 import View.InfoFooter exposing (infoFooter)
-import View.TaskEntry as TaskEntryView
-import View.TaskList.Main as TaskListView
+import View.TodoEntry as TodoEntryView
+import View.TodoList.Main as TodoListView
 
 
 view : Model -> Html Msg
 view model =
     let
-        taskList =
-            model.taskList
+        todoList =
+            model.todoList
 
-        taskEntry =
-            model.taskEntry
+        todoEntry =
+            model.todoEntry
 
         control =
             model.control
@@ -28,9 +28,9 @@ view model =
         , style [ ( "visibility", "hidden" ) ]
         ]
         [ section [ id "todoapp" ]
-            [ lazy TaskEntryView.taskEntry taskEntry
-            , lazy2 TaskListView.taskList control.visibility taskList
-            , lazy2 ControlsView.controls control.visibility taskList
+            [ lazy TodoEntryView.todoEntry todoEntry
+            , lazy2 TodoListView.todoList control.visibility todoList
+            , lazy2 ControlsView.controls control.visibility todoList
             ]
         , infoFooter
         ]

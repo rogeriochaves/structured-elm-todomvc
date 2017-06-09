@@ -1,4 +1,4 @@
-module Model.Task exposing (..)
+module Model.Todo exposing (..)
 
 
 type alias Model =
@@ -9,8 +9,8 @@ type alias Model =
     }
 
 
-newTask : Int -> String -> Model
-newTask id description =
+newTodo : Int -> String -> Model
+newTodo id description =
     { description = description
     , completed = False
     , editing = False
@@ -20,4 +20,4 @@ newTask id description =
 
 model : Model
 model =
-    newTask 1 ""
+    newTodo 1 ""

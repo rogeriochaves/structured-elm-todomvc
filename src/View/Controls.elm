@@ -3,33 +3,33 @@ module View.Controls exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Model.Task as Task
+import Model.Todo as Todo
 import Msg.Control exposing (..)
 import Msg.Main as Main exposing (..)
-import Msg.TaskList exposing (..)
+import Msg.TodoList exposing (..)
 
 
-controls : String -> List Task.Model -> Html Main.Msg
-controls visibility tasks =
+controls : String -> List Todo.Model -> Html Main.Msg
+controls visibility todos =
     let
-        tasksCompleted =
-            List.length (List.filter .completed tasks)
+        todosCompleted =
+            List.length (List.filter .completed todos)
 
-        tasksLeft =
-            List.length tasks - tasksCompleted
+        todosLeft =
+            List.length todos - todosCompleted
 
         item_ =
-            if tasksLeft == 1 then
+            if todosLeft == 1 then
                 " item"
             else
                 " items"
     in
     footer
         [ id "footer"
-        , hidden (List.isEmpty tasks)
+        , hidden (List.isEmpty todos)
         ]
         [ span [ id "todo-count" ]
-            [ strong [] [ text (toString tasksLeft) ]
+            [ strong [] [ text (toString todosLeft) ]
             , text (item_ ++ " left")
             ]
         , ul [ id "filters" ]
@@ -42,10 +42,10 @@ controls visibility tasks =
         , button
             [ class "clear-completed"
             , id "clear-completed"
-            , hidden (tasksCompleted == 0)
-            , onClick (MsgForTaskList DeleteComplete)
+            , hidden (todosCompleted == 0)
+            , onClick (MsgForTodoList DeleteComplete)
             ]
-            [ text ("Clear completed (" ++ toString tasksCompleted ++ ")") ]
+            [ text ("Clear completed (" ++ toString todosCompleted ++ ")") ]
         ]
 
 
