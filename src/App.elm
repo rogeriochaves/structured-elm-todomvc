@@ -43,58 +43,52 @@ updateWithCmd focus msg model =
 
 update : Msg -> Model -> Model
 update msg model =
-    case msg of
+    (case msg of
         MsgForControl msg_ ->
-            let
-                ( control, outMsg ) =
-                    Control.update msg_ model.control
-
-                model_ =
-                    { model | control = control }
-            in
-            case outMsg of
-                Control.OutNoOp ->
-                    model_
-
-                Control.TodoListDeleteCompleted ->
-                    update (MsgForTodoList TodoList.DeleteCompleted) model_
+            { model | control = Control.update msg_ model.control }
 
         MsgForTodoEntry msg_ ->
-            let
-                ( todoEntry, outMsg ) =
-                    Todo.update msg_ model.todoEntry
-
-                model_ =
-                    { model | todoEntry = todoEntry }
-            in
-            case outMsg of
-                Todo.OutNoOp ->
-                    model_
-
-                Todo.TodoListAdd id description ->
-                    update (MsgForTodoList <| TodoList.Add id description) model_
+            { model | todoEntry = Todo.update msg_ model.todoEntry }
 
         MsgForTodoList msg_ ->
-            let
-                ( todoList, outMsg ) =
-                    TodoList.update msg_ model.todoList
+            { model | todoList = TodoList.update msg_ model.todoList }
+    )
+        |> updateOutMsg msg
 
-                model_ =
-                    { model | todoList = todoList }
-            in
-            case outMsg of
+
+updateOutMsg : Msg -> Model -> Model
+updateOutMsg msg model =
+    case msg of
+        MsgForControl msg_ ->
+            case Control.updateOutMsg msg_ model.control of
+                Control.OutNoOp ->
+                    model
+
+                Control.TodoListDeleteCompleted ->
+                    update (MsgForTodoList TodoList.DeleteCompleted) model
+
+        MsgForTodoEntry msg_ ->
+            case Todo.updateOutMsg msg_ model.todoEntry of
+                Todo.OutNoOp ->
+                    model
+
+                Todo.TodoListAdd id description ->
+                    update (MsgForTodoList <| TodoList.Add id description) model
+
+        MsgForTodoList msg_ ->
+            case TodoList.updateOutMsg msg_ model.todoList of
                 TodoList.OutNoOp ->
-                    model_
+                    model
 
                 TodoList.NewTodoEntry id ->
-                    update (MsgForTodoEntry <| Todo.Add id "") model_
+                    update (MsgForTodoEntry <| Todo.Add id "") model
 
 
 updateCmd : FocusPort -> Msg -> Cmd Msg
 updateCmd focus msg =
     case msg of
         MsgForTodoList msg_ ->
-            TodoList.updateTodoCmd focus msg_
+            TodoList.updateCmd focus msg_
 
         _ ->
             Cmd.none

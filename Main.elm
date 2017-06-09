@@ -1,7 +1,8 @@
 port module Main exposing (..)
 
-import App exposing (Model, Msg, init, updateWithCmd, view, withSetStorage)
+import App exposing (Msg, init, updateWithCmd, view, withSetStorage)
 import Html
+import Model.App exposing (Model)
 
 
 main : Program (Maybe Model) Model Msg

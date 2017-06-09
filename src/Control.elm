@@ -13,11 +13,21 @@ type OutMsg
     | TodoListDeleteCompleted
 
 
-update : Msg -> Model -> ( Model, OutMsg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         ChangeVisibility visibility ->
-            ( { model | visibility = visibility }, OutNoOp )
+            { model | visibility = visibility }
 
         DeleteCompleted ->
-            ( model, TodoListDeleteCompleted )
+            model
+
+
+updateOutMsg : Msg -> Model -> OutMsg
+updateOutMsg msg model =
+    case msg of
+        DeleteCompleted ->
+            TodoListDeleteCompleted
+
+        _ ->
+            OutNoOp

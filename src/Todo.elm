@@ -16,20 +16,30 @@ type OutMsg
     | TodoListAdd Int String
 
 
-update : Msg -> Model -> ( Model, OutMsg )
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         NoOp ->
-            ( model, OutNoOp )
+            model
 
         Check isCompleted ->
-            ( { model | completed = isCompleted }, OutNoOp )
+            { model | completed = isCompleted }
 
         Editing isEditing ->
-            ( { model | editing = isEditing }, OutNoOp )
+            { model | editing = isEditing }
 
         Update description ->
-            ( { model | description = description }, OutNoOp )
+            { model | description = description }
 
         Add id description ->
-            ( newTodo id "", TodoListAdd id description )
+            newTodo id ""
+
+
+updateOutMsg : Msg -> Model -> OutMsg
+updateOutMsg msg model =
+    case msg of
+        Add id description ->
+            TodoListAdd id description
+
+        _ ->
+            OutNoOp

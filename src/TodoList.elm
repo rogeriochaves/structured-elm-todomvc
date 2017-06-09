@@ -19,34 +19,33 @@ type OutMsg
     | NewTodoEntry Int
 
 
-update : Msg -> Model -> ( Model, OutMsg )
+update : Msg -> Model -> Model
 update msgFor todoList =
     case msgFor of
         NoOp ->
-            ( todoList, OutNoOp )
+            todoList
 
         Add id description ->
             if String.isEmpty description then
-                ( todoList, OutNoOp )
+                todoList
             else
-                ( todoList ++ [ newTodo id description ], NewTodoEntry (id + 1) )
+                todoList ++ [ newTodo id description ]
 
         Delete id ->
-            ( List.filter (\t -> t.id /= id) todoList, OutNoOp )
+            List.filter (\t -> t.id /= id) todoList
 
         DeleteCompleted ->
-            ( List.filter (not << .completed) todoList, OutNoOp )
+            List.filter (not << .completed) todoList
 
         CheckAll isCompleted ->
             let
                 updateTodo t =
                     Todo.update (Check isCompleted) t
-                        |> Tuple.first
             in
-            ( List.map updateTodo todoList, OutNoOp )
+            List.map updateTodo todoList
 
         MsgForTodo id msg ->
-            ( updateTodo id msg todoList, OutNoOp )
+            updateTodo id msg todoList
 
 
 updateTodo : Int -> Todo.Msg -> Model -> Model
@@ -55,7 +54,6 @@ updateTodo id msg todoList =
         updateTodo todo =
             if todo.id == id then
                 Todo.update msg todo
-                    |> Tuple.first
             else
                 todo
     in
@@ -66,11 +64,24 @@ type alias FocusPort a =
     String -> Cmd a
 
 
-updateTodoCmd : FocusPort a -> Msg -> Cmd a
-updateTodoCmd focus msg =
+updateCmd : FocusPort a -> Msg -> Cmd a
+updateCmd focus msg =
     case msg of
         MsgForTodo id (Editing _) ->
             focus ("#todo-" ++ toString id)
 
         _ ->
             Cmd.none
+
+
+updateOutMsg : Msg -> Model -> OutMsg
+updateOutMsg msgFor todoList =
+    case msgFor of
+        Add id description ->
+            if String.isEmpty description then
+                OutNoOp
+            else
+                NewTodoEntry (id + 1)
+
+        _ ->
+            OutNoOp
