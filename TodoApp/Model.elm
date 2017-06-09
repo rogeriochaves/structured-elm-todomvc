@@ -2,7 +2,7 @@ module TodoApp.Model exposing (..)
 
 import TodoApp.Control as Control
 import TodoApp.Msg exposing (Msg)
-import TodoApp.Task.Model as Task
+import TodoApp.Task as Task
 import TodoApp.TaskList as TaskList
 
 

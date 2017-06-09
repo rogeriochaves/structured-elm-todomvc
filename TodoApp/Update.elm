@@ -3,7 +3,7 @@ module TodoApp.Update exposing (..)
 import TodoApp.Control as Control
 import TodoApp.Model exposing (Model)
 import TodoApp.Msg exposing (..)
-import TodoApp.Task.Update as Task
+import TodoApp.Task as Task
 import TodoApp.TaskList as TaskList
 
 

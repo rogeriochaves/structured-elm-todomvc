@@ -1,7 +1,33 @@
-module TodoApp.Task.Update exposing (..)
+module TodoApp.Task exposing (..)
 
-import TodoApp.Task.Model exposing (Model, newTask)
-import TodoApp.Task.Msg as Task exposing (..)
+
+type alias Model =
+    { description : String
+    , completed : Bool
+    , editing : Bool
+    , id : Int
+    }
+
+
+newTask : Int -> String -> Model
+newTask id description =
+    { description = description
+    , completed = False
+    , editing = False
+    , id = id
+    }
+
+
+model : Model
+model =
+    newTask 1 ""
+
+
+type Msg
+    = Check Bool
+    | Editing Bool
+    | Update String
+
 
 
 -- update : Main.Msg -> Model -> Model
@@ -20,7 +46,7 @@ import TodoApp.Task.Msg as Task exposing (..)
 --             task
 
 
-update : Task.Msg -> Model -> Model
+update : Msg -> Model -> Model
 update msg model =
     case msg of
         Check isCompleted ->

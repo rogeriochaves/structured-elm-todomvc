@@ -1,8 +1,6 @@
 module TodoApp.TaskList exposing (..)
 
-import TodoApp.Task.Model as Task exposing (newTask)
-import TodoApp.Task.Msg as Task exposing (..)
-import TodoApp.Task.Update as UpdateTask
+import TodoApp.Task as Task exposing (..)
 
 
 type alias Model =
@@ -40,7 +38,7 @@ update msgFor taskList =
         CheckAll isCompleted ->
             let
                 updateTask t =
-                    UpdateTask.update (Check isCompleted) t
+                    Task.update (Check isCompleted) t
             in
             List.map updateTask taskList
 
@@ -53,7 +51,7 @@ updateTask id msg taskList =
     let
         updateTask task =
             if task.id == id then
-                UpdateTask.update msg task
+                Task.update msg task
             else
                 task
     in

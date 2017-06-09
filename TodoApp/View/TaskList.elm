@@ -4,7 +4,7 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import TodoApp.Msg as Main exposing (..)
-import TodoApp.Task.Model as Task
+import TodoApp.Task as Task
 import TodoApp.TaskList exposing (..)
 import TodoApp.View.Task.TodoItem exposing (todoItem)
 
