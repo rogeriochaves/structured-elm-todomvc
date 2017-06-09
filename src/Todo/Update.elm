@@ -57,14 +57,14 @@ update msg model =
             { model | description = description }
 
         Add id description ->
-            newTodo id ""
+            newTodo (id + 1) ""
 
 
 updateCmd : InternalMsg -> Cmd Msg
 updateCmd msg =
     case msg of
         Add id description ->
-            Task.perform ForParent (Task.succeed <| TodoListAdd id description)
+            Task.perform ForParent (Task.succeed <| TodoListAdd (id + 1) description)
 
         _ ->
             Cmd.none

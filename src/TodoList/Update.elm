@@ -1,6 +1,5 @@
 module TodoList.Update exposing (..)
 
-import Task
 import Todo.Model exposing (newTodo)
 import Todo.Update exposing (..)
 import TodoList.Model exposing (..)
@@ -94,9 +93,6 @@ updateCmd focus msg =
     case msg of
         MsgForTodo id (Editing _) ->
             focus ("#todo-" ++ toString id)
-
-        Add id description ->
-            Task.perform ForParent (Task.succeed <| NewTodoEntry (id + 1))
 
         _ ->
             Cmd.none
