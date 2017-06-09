@@ -1,4 +1,4 @@
-module TodoApp.Control.View.Controls exposing (..)
+module TodoApp.View.Controls exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)

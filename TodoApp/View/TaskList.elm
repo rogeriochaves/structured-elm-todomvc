@@ -1,12 +1,12 @@
-module TodoApp.TaskList.View.TaskList exposing (..)
+module TodoApp.View.TaskList exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import TodoApp.Msg as Main exposing (..)
 import TodoApp.Task.Model as Task
-import TodoApp.Task.View.TodoItem exposing (todoItem)
 import TodoApp.TaskList.Msg exposing (..)
+import TodoApp.View.Task.TodoItem exposing (todoItem)
 
 
 taskList : String -> List Task.Model -> Html Main.Msg
