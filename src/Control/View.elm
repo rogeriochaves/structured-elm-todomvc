@@ -41,7 +41,7 @@ controls visibility todos =
             [ class "clear-completed"
             , id "clear-completed"
             , hidden (todosCompleted == 0)
-            , onClick DeleteCompleted
+            , onClick (ForSelf DeleteCompleted)
             ]
             [ text ("Clear completed (" ++ toString todosCompleted ++ ")") ]
         ]
@@ -49,5 +49,5 @@ controls visibility todos =
 
 visibilitySwap : String -> String -> String -> Html Msg
 visibilitySwap uri visibility actualVisibility =
-    li [ onClick (ChangeVisibility visibility) ]
+    li [ onClick (ForSelf <| ChangeVisibility visibility) ]
         [ a [ href uri, classList [ ( "selected", visibility == actualVisibility ) ] ] [ text visibility ] ]

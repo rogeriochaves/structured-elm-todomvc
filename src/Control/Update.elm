@@ -1,19 +1,44 @@
 module Control.Update exposing (..)
 
 import Control.Model exposing (Model)
+import Task
 
 
-type Msg
+type InternalMsg
     = ChangeVisibility String
     | DeleteCompleted
 
 
 type OutMsg
-    = OutNoOp
-    | TodoListDeleteCompleted
+    = TodoListDeleteCompleted
 
 
-update : Msg -> Model -> Model
+type Msg
+    = ForSelf InternalMsg
+    | ForParent OutMsg
+
+
+type alias TranslationDictionary msg =
+    { onInternalMessage : InternalMsg -> msg
+    , onDeleteCompleted : msg
+    }
+
+
+type alias Translator msg =
+    Msg -> msg
+
+
+translator : TranslationDictionary msg -> Translator msg
+translator { onInternalMessage, onDeleteCompleted } msg =
+    case msg of
+        ForSelf internal ->
+            onInternalMessage internal
+
+        ForParent TodoListDeleteCompleted ->
+            onDeleteCompleted
+
+
+update : InternalMsg -> Model -> Model
 update msg model =
     case msg of
         ChangeVisibility visibility ->
@@ -23,11 +48,11 @@ update msg model =
             model
 
 
-updateOutMsg : Msg -> Model -> OutMsg
-updateOutMsg msg model =
+updateCmd : InternalMsg -> Cmd Msg
+updateCmd msg =
     case msg of
         DeleteCompleted ->
-            TodoListDeleteCompleted
+            Task.perform ForParent (Task.succeed TodoListDeleteCompleted)
 
         _ ->
-            OutNoOp
+            Cmd.none

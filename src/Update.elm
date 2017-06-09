@@ -9,7 +9,7 @@ import TodoList.Update as TodoList
 type Msg
     = MsgForTodoEntry Todo.Msg
     | MsgForTodoList TodoList.Msg
-    | MsgForControl Control.Msg
+    | MsgForControl Control.InternalMsg
 
 
 type alias FocusPort =
@@ -40,12 +40,7 @@ updateOutMsg : Msg -> Model -> Model
 updateOutMsg msg model =
     case msg of
         MsgForControl msg_ ->
-            case Control.updateOutMsg msg_ model.control of
-                Control.OutNoOp ->
-                    model
-
-                Control.TodoListDeleteCompleted ->
-                    update (MsgForTodoList TodoList.DeleteCompleted) model
+            model
 
         MsgForTodoEntry msg_ ->
             case Todo.updateOutMsg msg_ model.todoEntry of
@@ -67,8 +62,20 @@ updateOutMsg msg model =
 updateCmd : FocusPort -> Msg -> Cmd Msg
 updateCmd focus msg =
     case msg of
+        MsgForControl msg_ ->
+            Control.updateCmd msg_
+                |> Cmd.map controlTranslator
+
         MsgForTodoList msg_ ->
             TodoList.updateCmd focus msg_
 
         _ ->
             Cmd.none
+
+
+controlTranslator : Control.Translator Msg
+controlTranslator =
+    Control.translator
+        { onInternalMessage = MsgForControl
+        , onDeleteCompleted = MsgForTodoList TodoList.DeleteCompleted
+        }
