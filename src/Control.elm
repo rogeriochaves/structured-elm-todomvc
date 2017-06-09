@@ -1,15 +1,6 @@
 module Control exposing (..)
 
-
-type alias Model =
-    { visibility : String
-    }
-
-
-model : Model
-model =
-    { visibility = "All"
-    }
+import Model.Control exposing (Model)
 
 
 type Msg

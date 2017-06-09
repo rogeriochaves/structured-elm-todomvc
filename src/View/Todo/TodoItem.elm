@@ -4,7 +4,8 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
-import Todo as Todo exposing (Msg(..))
+import Model.Todo as Todo
+import Todo exposing (Msg(..))
 import TodoList exposing (..)
 import View.Todo.Events exposing (onEnter)
 

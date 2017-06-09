@@ -4,27 +4,13 @@ import Control as Control
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Lazy exposing (lazy, lazy2)
+import Model.App exposing (..)
 import Todo as Todo
 import TodoList as TodoList
 import View.Controls as ControlsView
 import View.InfoFooter exposing (infoFooter)
 import View.Todo.TodoEntry as TodoEntryView
 import View.TodoList as TodoListView
-
-
-type alias Model =
-    { todoEntry : Todo.Model
-    , todoList : TodoList.Model
-    , control : Control.Model
-    }
-
-
-initialModel : Model
-initialModel =
-    { todoEntry = Todo.model
-    , todoList = TodoList.model
-    , control = Control.model
-    }
 
 
 init : Maybe Model -> ( Model, Cmd Msg )

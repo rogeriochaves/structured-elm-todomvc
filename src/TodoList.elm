@@ -1,15 +1,8 @@
 module TodoList exposing (..)
 
-import Todo as Todo exposing (..)
-
-
-type alias Model =
-    List Todo.Model
-
-
-model : Model
-model =
-    []
+import Model.Todo exposing (newTodo)
+import Model.TodoList exposing (..)
+import Todo exposing (..)
 
 
 type Msg
