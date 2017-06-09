@@ -1,7 +1,7 @@
 module TodoList.Update exposing (..)
 
-import String
 import Msg as Main exposing (..)
+import String
 import Todo.Model exposing (newTodo)
 import Todo.Msg as Todo exposing (..)
 import Todo.Update as UpdateTodo
@@ -14,9 +14,6 @@ update msgFor todoList =
     case msgFor of
         MsgForTodoList msg ->
             updateTodoList msg todoList
-
-        MsgForTodo id msg ->
-            updateTodo id msg todoList
 
         _ ->
             todoList
@@ -44,6 +41,9 @@ updateTodoList msg todoList =
             in
             List.map updateTodo todoList
 
+        MsgForTodo id msg ->
+            updateTodo id msg todoList
+
 
 updateTodo : Int -> Todo.Msg -> Model -> Model
 updateTodo id msg todoList =
@@ -55,3 +55,17 @@ updateTodo id msg todoList =
                 todo
     in
     List.map updateTodo todoList
+
+
+type alias FocusPort a =
+    String -> Cmd a
+
+
+updateCmd : FocusPort a -> Main.Msg -> Cmd a
+updateCmd focus msg =
+    case msg of
+        MsgForTodoList (MsgForTodo id (Editing _)) ->
+            focus ("#todo-" ++ toString id)
+
+        _ ->
+            Cmd.none

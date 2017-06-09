@@ -28,5 +28,5 @@ update msg model =
 updateCmd : FocusPort -> Msg -> Cmd Msg
 updateCmd focus msg =
     Cmd.batch
-        [ Todo.updateTodoCmd focus msg
+        [ TodoList.updateCmd focus msg
         ]
