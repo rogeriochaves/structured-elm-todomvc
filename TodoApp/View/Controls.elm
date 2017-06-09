@@ -6,7 +6,7 @@ import Html.Events exposing (..)
 import TodoApp.Control exposing (..)
 import TodoApp.Msg as Main exposing (..)
 import TodoApp.Task.Model as Task
-import TodoApp.TaskList.Msg exposing (..)
+import TodoApp.TaskList exposing (..)
 
 
 controls : String -> List Task.Model -> Html Main.Msg

@@ -7,7 +7,7 @@ import Json.Decode as Json
 import TodoApp.Msg as Main exposing (..)
 import TodoApp.Task.Model as Task
 import TodoApp.Task.Msg exposing (..)
-import TodoApp.TaskList.Msg exposing (..)
+import TodoApp.TaskList exposing (..)
 import TodoApp.View.Task.Events exposing (onEnter)
 
 
@@ -19,10 +19,10 @@ todoItem todo =
                 [ class "toggle"
                 , type_ "checkbox"
                 , checked todo.completed
-                , onClick (MsgForTask todo.id <| Check (not todo.completed))
+                , onClick (MsgForTaskList <| MsgForTask todo.id <| Check (not todo.completed))
                 ]
                 []
-            , label [ onDoubleClick (MsgForTask todo.id <| Editing True) ]
+            , label [ onDoubleClick (MsgForTaskList <| MsgForTask todo.id <| Editing True) ]
                 [ text todo.description ]
             , button
                 [ class "destroy"
@@ -35,9 +35,9 @@ todoItem todo =
             , value todo.description
             , name "title"
             , id ("todo-" ++ toString todo.id)
-            , on "input" (Json.map (MsgForTask todo.id << Update) targetValue)
-            , onBlur (MsgForTask todo.id <| Editing False)
-            , onEnter NoOp (MsgForTask todo.id <| Editing False)
+            , on "input" (Json.map (MsgForTaskList << MsgForTask todo.id << Update) targetValue)
+            , onBlur (MsgForTaskList <| MsgForTask todo.id <| Editing False)
+            , onEnter NoOp (MsgForTaskList <| MsgForTask todo.id <| Editing False)
             ]
             []
         ]

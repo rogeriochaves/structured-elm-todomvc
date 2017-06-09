@@ -1,29 +1,27 @@
 module TodoApp.Task.Update exposing (..)
 
-import TodoApp.Msg as Main exposing (..)
 import TodoApp.Task.Model exposing (Model, newTask)
 import TodoApp.Task.Msg as Task exposing (..)
-import TodoApp.TaskList.Msg exposing (..)
 
 
-update : Main.Msg -> Model -> Model
-update msgFor task =
-    case msgFor of
-        MsgForTaskEntry msg ->
-            updateTask msg task
+-- update : Main.Msg -> Model -> Model
+-- update msgFor task =
+--     case msgFor of
+--         MsgForTaskEntry msg ->
+--             updateTask msg task
+--
+--         MsgForTask _ msg ->
+--             updateTask msg task
+--
+--         MsgForTaskList (Add id _) ->
+--             newTask (id + 1) ""
+--
+--         _ ->
+--             task
 
-        MsgForTask _ msg ->
-            updateTask msg task
 
-        MsgForTaskList (Add id _) ->
-            newTask (id + 1) ""
-
-        _ ->
-            task
-
-
-updateTask : Task.Msg -> Model -> Model
-updateTask msg model =
+update : Task.Msg -> Model -> Model
+update msg model =
     case msg of
         Check isCompleted ->
             { model | completed = isCompleted }
@@ -33,17 +31,3 @@ updateTask msg model =
 
         Update description ->
             { model | description = description }
-
-
-type alias FocusPort =
-    String -> Cmd Main.Msg
-
-
-updateTaskCmd : FocusPort -> Main.Msg -> Cmd Main.Msg
-updateTaskCmd focus msg =
-    case msg of
-        MsgForTask id (Editing _) ->
-            focus ("#todo-" ++ toString id)
-
-        _ ->
-            Cmd.none

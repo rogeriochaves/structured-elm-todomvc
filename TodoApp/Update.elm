@@ -4,7 +4,7 @@ import TodoApp.Control as Control
 import TodoApp.Model exposing (Model)
 import TodoApp.Msg exposing (..)
 import TodoApp.Task.Update as Task
-import TodoApp.TaskList.Update as TaskList
+import TodoApp.TaskList as TaskList
 
 
 type alias FocusPort =
@@ -19,18 +19,24 @@ updateWithCmd focus msg model =
 update : Msg -> Model -> Model
 update msg model =
     case msg of
+        NoOp ->
+            model
+
         MsgForControl msg_ ->
             { model | control = Control.update msg_ model.control }
 
-        _ ->
-            { model
-                | taskEntry = Task.update msg model.taskEntry
-                , taskList = TaskList.update msg model.taskList
-            }
+        MsgForTaskEntry msg_ ->
+            { model | taskEntry = Task.update msg_ model.taskEntry }
+
+        MsgForTaskList msg_ ->
+            { model | taskList = TaskList.update msg_ model.taskList }
 
 
 updateCmd : FocusPort -> Msg -> Cmd Msg
 updateCmd focus msg =
-    Cmd.batch
-        [ Task.updateTaskCmd focus msg
-        ]
+    case msg of
+        MsgForTaskList msg_ ->
+            TaskList.updateTaskCmd focus msg_
+
+        _ ->
+            Cmd.none

@@ -5,13 +5,13 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
 import TodoApp.Msg as Main exposing (..)
-import TodoApp.Task.Model exposing (Model)
+import TodoApp.Task.Model as Task exposing (Model)
 import TodoApp.Task.Msg exposing (..)
-import TodoApp.TaskList.Msg exposing (..)
+import TodoApp.TaskList exposing (..)
 import TodoApp.View.Task.Events exposing (onEnter)
 
 
-taskEntry : Model -> Html Main.Msg
+taskEntry : Task.Model -> Html Main.Msg
 taskEntry taskEntry =
     header [ id "header" ]
         [ h1 [] [ text "todos" ]

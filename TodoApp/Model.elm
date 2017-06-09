@@ -3,7 +3,7 @@ module TodoApp.Model exposing (..)
 import TodoApp.Control as Control
 import TodoApp.Msg exposing (Msg)
 import TodoApp.Task.Model as Task
-import TodoApp.TaskList.Model as TaskList
+import TodoApp.TaskList as TaskList
 
 
 type alias Model =

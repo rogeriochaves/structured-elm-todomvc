@@ -1,30 +1,30 @@
-module TodoApp.TaskList.Update exposing (..)
+module TodoApp.TaskList exposing (..)
 
-import String
-import TodoApp.Msg as Main exposing (..)
-import TodoApp.Task.Model exposing (newTask)
+import TodoApp.Task.Model as Task exposing (newTask)
 import TodoApp.Task.Msg as Task exposing (..)
 import TodoApp.Task.Update as UpdateTask
-import TodoApp.TaskList.Model exposing (Model)
-import TodoApp.TaskList.Msg as TaskList exposing (..)
 
 
-update : Main.Msg -> Model -> Model
+type alias Model =
+    List Task.Model
+
+
+model : Model
+model =
+    []
+
+
+type Msg
+    = Add Int String
+    | Delete Int
+    | DeleteComplete
+    | CheckAll Bool
+    | MsgForTask Int Task.Msg
+
+
+update : Msg -> Model -> Model
 update msgFor taskList =
     case msgFor of
-        MsgForTaskList msg ->
-            updateTaskList msg taskList
-
-        MsgForTask id msg ->
-            updateTask id msg taskList
-
-        _ ->
-            taskList
-
-
-updateTaskList : TaskList.Msg -> Model -> Model
-updateTaskList msg taskList =
-    case msg of
         Add id description ->
             if String.isEmpty description then
                 taskList
@@ -40,9 +40,12 @@ updateTaskList msg taskList =
         CheckAll isCompleted ->
             let
                 updateTask t =
-                    UpdateTask.updateTask (Check isCompleted) t
+                    UpdateTask.update (Check isCompleted) t
             in
             List.map updateTask taskList
+
+        MsgForTask id msg ->
+            updateTask id msg taskList
 
 
 updateTask : Int -> Task.Msg -> Model -> Model
@@ -50,8 +53,22 @@ updateTask id msg taskList =
     let
         updateTask task =
             if task.id == id then
-                UpdateTask.updateTask msg task
+                UpdateTask.update msg task
             else
                 task
     in
     List.map updateTask taskList
+
+
+type alias FocusPort a =
+    String -> Cmd a
+
+
+updateTaskCmd : FocusPort a -> Msg -> Cmd a
+updateTaskCmd focus msg =
+    case msg of
+        MsgForTask id (Editing _) ->
+            focus ("#todo-" ++ toString id)
+
+        _ ->
+            Cmd.none
