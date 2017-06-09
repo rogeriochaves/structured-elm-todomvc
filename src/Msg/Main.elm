@@ -9,5 +9,4 @@ type Msg
     = NoOp
     | MsgForTodoEntry Todo.Msg
     | MsgForTodoList TodoList.Msg
-    | MsgForTodo Int Todo.Msg
     | MsgForControl Control.Msg

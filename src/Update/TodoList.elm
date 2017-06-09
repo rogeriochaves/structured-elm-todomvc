@@ -15,9 +15,6 @@ update msgFor todoList =
         MsgForTodoList msg ->
             updateTodoList msg todoList
 
-        MsgForTodo id msg ->
-            updateTodo id msg todoList
-
         _ ->
             todoList
 
@@ -44,6 +41,9 @@ updateTodoList msg todoList =
             in
             List.map updateTodo todoList
 
+        MsgForTodo id msg ->
+            updateTodo id msg todoList
+
 
 updateTodo : Int -> Todo.Msg -> Model -> Model
 updateTodo id msg todoList =
@@ -55,3 +55,17 @@ updateTodo id msg todoList =
                 todo
     in
     List.map updateTodo todoList
+
+
+type alias FocusPort =
+    String -> Cmd Main.Msg
+
+
+updateCmd : FocusPort -> Main.Msg -> Cmd Main.Msg
+updateCmd focus msg =
+    case msg of
+        MsgForTodoList (MsgForTodo id (Editing _)) ->
+            focus ("#todo-" ++ toString id)
+
+        _ ->
+            Cmd.none

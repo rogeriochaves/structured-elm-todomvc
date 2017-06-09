@@ -12,9 +12,6 @@ update msgFor todo =
         MsgForTodoEntry msg ->
             updateTodo msg todo
 
-        MsgForTodo _ msg ->
-            updateTodo msg todo
-
         MsgForTodoList (Add id _) ->
             newTodo (id + 1) ""
 
@@ -33,17 +30,3 @@ updateTodo msg model =
 
         Update description ->
             { model | description = description }
-
-
-type alias FocusPort =
-    String -> Cmd Main.Msg
-
-
-updateTodoCmd : FocusPort -> Main.Msg -> Cmd Main.Msg
-updateTodoCmd focus msg =
-    case msg of
-        MsgForTodo id (Editing _) ->
-            focus ("#todo-" ++ toString id)
-
-        _ ->
-            Cmd.none

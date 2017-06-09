@@ -19,10 +19,10 @@ todoItem todo =
                 [ class "toggle"
                 , type_ "checkbox"
                 , checked todo.completed
-                , onClick (MsgForTodo todo.id <| Check (not todo.completed))
+                , onClick (MsgForTodoList <| MsgForTodo todo.id <| Check (not todo.completed))
                 ]
                 []
-            , label [ onDoubleClick (MsgForTodo todo.id <| Editing True) ]
+            , label [ onDoubleClick (MsgForTodoList <| MsgForTodo todo.id <| Editing True) ]
                 [ text todo.description ]
             , button
                 [ class "destroy"
@@ -35,9 +35,9 @@ todoItem todo =
             , value todo.description
             , name "title"
             , id ("todo-" ++ toString todo.id)
-            , on "input" (Json.map (MsgForTodo todo.id << Update) targetValue)
-            , onBlur (MsgForTodo todo.id <| Editing False)
-            , onEnter NoOp (MsgForTodo todo.id <| Editing False)
+            , on "input" (Json.map (MsgForTodoList << MsgForTodo todo.id << Update) targetValue)
+            , onBlur (MsgForTodoList <| MsgForTodo todo.id <| Editing False)
+            , onEnter NoOp (MsgForTodoList <| MsgForTodo todo.id <| Editing False)
             ]
             []
         ]
