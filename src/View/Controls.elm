@@ -43,7 +43,7 @@ controls visibility todos =
             [ class "clear-completed"
             , id "clear-completed"
             , hidden (todosCompleted == 0)
-            , onClick (MsgForTodoList DeleteComplete)
+            , onClick (MsgForTodoList DeleteCompleted)
             ]
             [ text ("Clear completed (" ++ toString todosCompleted ++ ")") ]
         ]
