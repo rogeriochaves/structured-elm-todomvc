@@ -59,7 +59,19 @@ update : Msg -> Model -> Model
 update msg model =
     case msg of
         MsgForControl msg_ ->
-            { model | control = Control.update msg_ model.control }
+            let
+                ( control, outMsg ) =
+                    Control.update msg_ model.control
+
+                model_ =
+                    { model | control = control }
+            in
+            case outMsg of
+                Control.OutNoOp ->
+                    model_
+
+                Control.TodoListDeleteCompleted ->
+                    update (MsgForTodoList TodoList.DeleteCompleted) model_
 
         MsgForTodoEntry msg_ ->
             let

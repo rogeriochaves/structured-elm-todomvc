@@ -16,7 +16,7 @@ type Msg
     = NoOp
     | Add Int String
     | Delete Int
-    | DeleteComplete
+    | DeleteCompleted
     | CheckAll Bool
     | MsgForTodo Int Todo.Msg
 
@@ -41,7 +41,7 @@ update msgFor todoList =
         Delete id ->
             ( List.filter (\t -> t.id /= id) todoList, OutNoOp )
 
-        DeleteComplete ->
+        DeleteCompleted ->
             ( List.filter (not << .completed) todoList, OutNoOp )
 
         CheckAll isCompleted ->

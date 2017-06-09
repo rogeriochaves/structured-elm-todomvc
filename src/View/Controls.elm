@@ -41,7 +41,7 @@ controls visibility todos =
             [ class "clear-completed"
             , id "clear-completed"
             , hidden (todosCompleted == 0)
-            , onClick DeleteComplete
+            , onClick DeleteCompleted
             ]
             [ text ("Clear completed (" ++ toString todosCompleted ++ ")") ]
         ]

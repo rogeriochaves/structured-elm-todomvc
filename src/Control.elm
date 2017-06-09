@@ -14,19 +14,19 @@ model =
 
 type Msg
     = ChangeVisibility String
-    | DeleteComplete
+    | DeleteCompleted
 
 
 type OutMsg
-    = NoOp
-    | TodoListDeleteComplete
+    = OutNoOp
+    | TodoListDeleteCompleted
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, OutMsg )
 update msg model =
     case msg of
         ChangeVisibility visibility ->
-            { model | visibility = visibility }
+            ( { model | visibility = visibility }, OutNoOp )
 
-        DeleteComplete ->
-            model
+        DeleteCompleted ->
+            ( model, TodoListDeleteCompleted )
