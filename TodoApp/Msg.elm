@@ -1,6 +1,6 @@
 module TodoApp.Msg exposing (..)
 
-import TodoApp.Control.Msg as Control
+import TodoApp.Control as Control
 import TodoApp.Task.Msg as Task
 import TodoApp.TaskList.Msg as TaskList
 

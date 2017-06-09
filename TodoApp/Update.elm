@@ -1,6 +1,6 @@
 module TodoApp.Update exposing (..)
 
-import TodoApp.Control.Update as Control
+import TodoApp.Control as Control
 import TodoApp.Model exposing (Model)
 import TodoApp.Msg exposing (..)
 import TodoApp.Task.Update as Task
@@ -18,11 +18,15 @@ updateWithCmd focus msg model =
 
 update : Msg -> Model -> Model
 update msg model =
-    { model
-        | taskEntry = Task.update msg model.taskEntry
-        , taskList = TaskList.update msg model.taskList
-        , control = Control.update msg model.control
-    }
+    case msg of
+        MsgForControl msg_ ->
+            { model | control = Control.update msg_ model.control }
+
+        _ ->
+            { model
+                | taskEntry = Task.update msg model.taskEntry
+                , taskList = TaskList.update msg model.taskList
+            }
 
 
 updateCmd : FocusPort -> Msg -> Cmd Msg

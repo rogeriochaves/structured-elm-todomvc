@@ -3,7 +3,7 @@ module TodoApp.View.Controls exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import TodoApp.Control.Msg exposing (..)
+import TodoApp.Control exposing (..)
 import TodoApp.Msg as Main exposing (..)
 import TodoApp.Task.Model as Task
 import TodoApp.TaskList.Msg exposing (..)
