@@ -1,4 +1,4 @@
-module Model.Todo exposing (..)
+module Todo.Model exposing (..)
 
 
 type alias Model =

@@ -1,6 +1,6 @@
 module Control exposing (..)
 
-import Model.Control exposing (Model)
+import Control.Model exposing (Model)
 
 
 type Msg

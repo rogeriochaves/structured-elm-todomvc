@@ -4,7 +4,7 @@ import Control exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Model.Todo as Todo
+import Todo.Model as Todo
 
 
 controls : String -> List Todo.Model -> Html Msg

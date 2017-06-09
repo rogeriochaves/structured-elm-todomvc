@@ -1,6 +1,6 @@
-module Model.TodoList exposing (..)
+module TodoList.Model exposing (..)
 
-import Model.Todo as Todo
+import Todo.Model as Todo
 
 
 type alias Model =

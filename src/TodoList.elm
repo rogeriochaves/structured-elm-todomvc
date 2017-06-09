@@ -1,7 +1,7 @@
 module TodoList exposing (..)
 
-import Model.Todo exposing (newTodo)
-import Model.TodoList exposing (..)
+import Todo.Model exposing (newTodo)
+import TodoList.Model exposing (..)
 import Todo exposing (..)
 
 

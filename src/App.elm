@@ -4,7 +4,7 @@ import Control as Control
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Lazy exposing (lazy, lazy2)
-import Model.App exposing (..)
+import Model exposing (..)
 import Todo as Todo
 import TodoList as TodoList
 import View.Controls as ControlsView

@@ -1,6 +1,6 @@
 module Todo exposing (..)
 
-import Model.Todo exposing (..)
+import Todo.Model exposing (..)
 
 
 type Msg

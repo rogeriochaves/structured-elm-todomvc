@@ -3,7 +3,7 @@ module View.TodoList exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
-import Model.Todo as Todo
+import Todo.Model as Todo
 import TodoList exposing (..)
 import View.Todo.TodoItem exposing (todoItem)
 

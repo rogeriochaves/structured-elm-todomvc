@@ -1,4 +1,4 @@
-module Model.Control exposing (..)
+module Control.Model exposing (..)
 
 
 type alias Model =
