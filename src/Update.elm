@@ -1,29 +1,9 @@
-module App exposing (..)
+module Update exposing (..)
 
 import Control.Update as Control
-import Control.View as ControlsView
-import Html exposing (..)
-import Html.Attributes exposing (..)
-import Html.Lazy exposing (lazy, lazy2)
-import Layout.InfoFooter exposing (infoFooter)
 import Model exposing (..)
 import Todo.Update as Todo
-import Todo.View.TodoEntry as TodoEntryView
 import TodoList.Update as TodoList
-import TodoList.View.TodoList as TodoListView
-
-
-init : Maybe Model -> ( Model, Cmd Msg )
-init savedModel =
-    Maybe.withDefault initialModel savedModel ! []
-
-
-{-| We want to `setStorage` on every update. This function adds the setStorage
-command for every step of the update function.
--}
-withSetStorage : (Model -> Cmd Msg) -> ( Model, Cmd Msg ) -> ( Model, Cmd Msg )
-withSetStorage setStorage ( model, cmds ) =
-    ( model, Cmd.batch [ setStorage model, cmds ] )
 
 
 type Msg
@@ -92,28 +72,3 @@ updateCmd focus msg =
 
         _ ->
             Cmd.none
-
-
-view : Model -> Html Msg
-view model =
-    let
-        todoList =
-            model.todoList
-
-        todoEntry =
-            model.todoEntry
-
-        control =
-            model.control
-    in
-    div
-        [ class "todomvc-wrapper"
-        , style [ ( "visibility", "hidden" ) ]
-        ]
-        [ section [ id "todoapp" ]
-            [ Html.map MsgForTodoEntry <| lazy TodoEntryView.todoEntry todoEntry
-            , Html.map MsgForTodoList <| lazy2 TodoListView.todoList control.visibility todoList
-            , Html.map MsgForControl <| lazy2 ControlsView.controls control.visibility todoList
-            ]
-        , infoFooter
-        ]
