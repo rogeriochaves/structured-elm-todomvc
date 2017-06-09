@@ -1,11 +1,12 @@
 module TodoList.Update exposing (..)
 
+import Task
 import Todo.Model exposing (newTodo)
 import Todo.Update exposing (..)
 import TodoList.Model exposing (..)
 
 
-type Msg
+type InternalMsg
     = NoOp
     | Add Int String
     | Delete Int
@@ -15,11 +16,35 @@ type Msg
 
 
 type OutMsg
-    = OutNoOp
-    | NewTodoEntry Int
+    = NewTodoEntry Int
 
 
-update : Msg -> Model -> Model
+type Msg
+    = ForSelf InternalMsg
+    | ForParent OutMsg
+
+
+type alias TranslationDictionary msg =
+    { onInternalMessage : InternalMsg -> msg
+    , onNewTodoEntry : Int -> msg
+    }
+
+
+type alias Translator msg =
+    Msg -> msg
+
+
+translator : TranslationDictionary msg -> Translator msg
+translator { onInternalMessage, onNewTodoEntry } msg =
+    case msg of
+        ForSelf internal ->
+            onInternalMessage internal
+
+        ForParent (NewTodoEntry id) ->
+            onNewTodoEntry id
+
+
+update : InternalMsg -> Model -> Model
 update msgFor todoList =
     case msgFor of
         NoOp ->
@@ -60,28 +85,18 @@ updateTodo id msg todoList =
     List.map updateTodo todoList
 
 
-type alias FocusPort a =
-    String -> Cmd a
+type alias FocusPort =
+    String -> Cmd Msg
 
 
-updateCmd : FocusPort a -> Msg -> Cmd a
+updateCmd : FocusPort -> InternalMsg -> Cmd Msg
 updateCmd focus msg =
     case msg of
         MsgForTodo id (Editing _) ->
             focus ("#todo-" ++ toString id)
 
+        Add id description ->
+            Task.perform ForParent (Task.succeed <| NewTodoEntry (id + 1))
+
         _ ->
             Cmd.none
-
-
-updateOutMsg : Msg -> Model -> OutMsg
-updateOutMsg msgFor todoList =
-    case msgFor of
-        Add id description ->
-            if String.isEmpty description then
-                OutNoOp
-            else
-                NewTodoEntry (id + 1)
-
-        _ ->
-            OutNoOp

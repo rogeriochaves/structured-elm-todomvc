@@ -29,7 +29,7 @@ view model =
         ]
         [ section [ id "todoapp" ]
             [ Html.map todoTranslator <| lazy TodoEntryView.todoEntry todoEntry
-            , Html.map MsgForTodoList <| lazy2 TodoListView.todoList control.visibility todoList
+            , Html.map todoListTranslator <| lazy2 TodoListView.todoList control.visibility todoList
             , Html.map controlTranslator <| lazy2 ControlsView.controls control.visibility todoList
             ]
         , infoFooter

@@ -40,7 +40,7 @@ todoList visibility todos =
             , type_ "checkbox"
             , name "toggle"
             , checked allCompleted
-            , onClick (CheckAll (not allCompleted))
+            , onClick (ForSelf <| CheckAll (not allCompleted))
             ]
             []
         , label [ for "toggle-all" ]

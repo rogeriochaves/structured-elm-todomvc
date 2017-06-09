@@ -8,12 +8,12 @@ import TodoList.Update as TodoList
 
 type Msg
     = MsgForTodoEntry Todo.InternalMsg
-    | MsgForTodoList TodoList.Msg
+    | MsgForTodoList TodoList.InternalMsg
     | MsgForControl Control.InternalMsg
 
 
 type alias FocusPort =
-    String -> Cmd Msg
+    String -> Cmd TodoList.Msg
 
 
 updateWithCmd : FocusPort -> Msg -> Model -> ( Model, Cmd Msg )
@@ -23,7 +23,7 @@ updateWithCmd focus msg model =
 
 update : Msg -> Model -> Model
 update msg model =
-    (case msg of
+    case msg of
         MsgForControl msg_ ->
             { model | control = Control.update msg_ model.control }
 
@@ -32,26 +32,6 @@ update msg model =
 
         MsgForTodoList msg_ ->
             { model | todoList = TodoList.update msg_ model.todoList }
-    )
-        |> updateOutMsg msg
-
-
-updateOutMsg : Msg -> Model -> Model
-updateOutMsg msg model =
-    case msg of
-        MsgForControl msg_ ->
-            model
-
-        MsgForTodoEntry msg_ ->
-            model
-
-        MsgForTodoList msg_ ->
-            case TodoList.updateOutMsg msg_ model.todoList of
-                TodoList.OutNoOp ->
-                    model
-
-                TodoList.NewTodoEntry id ->
-                    update (MsgForTodoEntry <| Todo.Add id "") model
 
 
 updateCmd : FocusPort -> Msg -> Cmd Msg
@@ -67,6 +47,7 @@ updateCmd focus msg =
 
         MsgForTodoList msg_ ->
             TodoList.updateCmd focus msg_
+                |> Cmd.map todoListTranslator
 
 
 controlTranslator : Control.Translator Msg
@@ -82,4 +63,12 @@ todoTranslator =
     Todo.translator
         { onInternalMessage = MsgForTodoEntry
         , onTodoListAdd = \id description -> MsgForTodoList <| TodoList.Add id description
+        }
+
+
+todoListTranslator : TodoList.Translator Msg
+todoListTranslator =
+    TodoList.translator
+        { onInternalMessage = MsgForTodoList
+        , onNewTodoEntry = \id -> MsgForTodoEntry <| Todo.Add id ""
         }
