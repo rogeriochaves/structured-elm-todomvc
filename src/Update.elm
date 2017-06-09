@@ -13,7 +13,7 @@ type Msg
 
 
 type alias FocusPort =
-    String -> Cmd TodoList.Msg
+    String -> Cmd Msg
 
 
 updateWithCmd : FocusPort -> Msg -> Model -> ( Model, Cmd Msg )
@@ -47,7 +47,6 @@ updateCmd focus msg =
 
         MsgForTodoList msg_ ->
             TodoList.updateCmd focus msg_
-                |> Cmd.map todoListTranslator
 
 
 controlTranslator : Control.Translator Msg
@@ -66,9 +65,6 @@ todoTranslator =
         }
 
 
-todoListTranslator : TodoList.Translator Msg
+todoListTranslator : TodoList.InternalMsg -> Msg
 todoListTranslator =
-    TodoList.translator
-        { onInternalMessage = MsgForTodoList
-        , onNewTodoEntry = \id -> MsgForTodoEntry <| Todo.Add id ""
-        }
+    MsgForTodoList

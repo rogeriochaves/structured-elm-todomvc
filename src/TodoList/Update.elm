@@ -14,35 +14,6 @@ type InternalMsg
     | MsgForTodo Int Todo.Update.InternalMsg
 
 
-type OutMsg
-    = NewTodoEntry Int
-
-
-type Msg
-    = ForSelf InternalMsg
-    | ForParent OutMsg
-
-
-type alias TranslationDictionary msg =
-    { onInternalMessage : InternalMsg -> msg
-    , onNewTodoEntry : Int -> msg
-    }
-
-
-type alias Translator msg =
-    Msg -> msg
-
-
-translator : TranslationDictionary msg -> Translator msg
-translator { onInternalMessage, onNewTodoEntry } msg =
-    case msg of
-        ForSelf internal ->
-            onInternalMessage internal
-
-        ForParent (NewTodoEntry id) ->
-            onNewTodoEntry id
-
-
 update : InternalMsg -> Model -> Model
 update msgFor todoList =
     case msgFor of
@@ -84,11 +55,11 @@ updateTodo id msg todoList =
     List.map updateTodo todoList
 
 
-type alias FocusPort =
-    String -> Cmd Msg
+type alias FocusPort a =
+    String -> Cmd a
 
 
-updateCmd : FocusPort -> InternalMsg -> Cmd Msg
+updateCmd : FocusPort a -> InternalMsg -> Cmd a
 updateCmd focus msg =
     case msg of
         MsgForTodo id (Editing _) ->

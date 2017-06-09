@@ -8,7 +8,7 @@ import TodoList.Update exposing (..)
 import TodoList.View.TodoItem exposing (todoItem)
 
 
-todoList : String -> List Todo.Model -> Html Msg
+todoList : String -> List Todo.Model -> Html InternalMsg
 todoList visibility todos =
     let
         isVisible todo =
@@ -40,7 +40,7 @@ todoList visibility todos =
             , type_ "checkbox"
             , name "toggle"
             , checked allCompleted
-            , onClick (ForSelf <| CheckAll (not allCompleted))
+            , onClick (CheckAll (not allCompleted))
             ]
             []
         , label [ for "toggle-all" ]
