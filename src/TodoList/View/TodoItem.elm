@@ -1,4 +1,4 @@
-module Todo.View.TodoItem exposing (..)
+module TodoList.View.TodoItem exposing (..)
 
 import Html exposing (..)
 import Html.Attributes exposing (..)
