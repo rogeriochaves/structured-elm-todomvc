@@ -36,7 +36,7 @@ todoItem todo =
             , id ("todo-" ++ toString todo.id)
             , on "input" (Json.map (MsgForTaskList << MsgForTask todo.id << Update) targetValue)
             , onBlur (MsgForTaskList <| MsgForTask todo.id <| Editing False)
-            , onEnter NoOp (MsgForTaskList <| MsgForTask todo.id <| Editing False)
+            , onEnter Main.NoOp (MsgForTaskList <| MsgForTask todo.id <| Editing False)
             ]
             []
         ]

@@ -20,30 +20,35 @@ type Msg
     | MsgForTask Int Task.Msg
 
 
-update : Msg -> Model -> Model
+type OutMsg
+    = NoOp
+    | NewTaskEntry Int
+
+
+update : Msg -> Model -> ( Model, OutMsg )
 update msgFor taskList =
     case msgFor of
         Add id description ->
             if String.isEmpty description then
-                taskList
+                ( taskList, NoOp )
             else
-                taskList ++ [ newTask id description ]
+                ( taskList ++ [ newTask id description ], NewTaskEntry (id + 1) )
 
         Delete id ->
-            List.filter (\t -> t.id /= id) taskList
+            ( List.filter (\t -> t.id /= id) taskList, NoOp )
 
         DeleteComplete ->
-            List.filter (not << .completed) taskList
+            ( List.filter (not << .completed) taskList, NoOp )
 
         CheckAll isCompleted ->
             let
                 updateTask t =
                     Task.update (Check isCompleted) t
             in
-            List.map updateTask taskList
+            ( List.map updateTask taskList, NoOp )
 
         MsgForTask id msg ->
-            updateTask id msg taskList
+            ( updateTask id msg taskList, NoOp )
 
 
 updateTask : Int -> Task.Msg -> Model -> Model

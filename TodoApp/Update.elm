@@ -29,7 +29,19 @@ update msg model =
             { model | taskEntry = Task.update msg_ model.taskEntry }
 
         MsgForTaskList msg_ ->
-            { model | taskList = TaskList.update msg_ model.taskList }
+            let
+                ( taskList, outMsg ) =
+                    TaskList.update msg_ model.taskList
+
+                model_ =
+                    { model | taskList = taskList }
+            in
+            case outMsg of
+                TaskList.NoOp ->
+                    model_
+
+                TaskList.NewTaskEntry id ->
+                    update (MsgForTaskEntry <| Task.New id) model_
 
 
 updateCmd : FocusPort -> Msg -> Cmd Msg

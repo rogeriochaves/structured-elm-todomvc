@@ -27,23 +27,7 @@ type Msg
     = Check Bool
     | Editing Bool
     | Update String
-
-
-
--- update : Main.Msg -> Model -> Model
--- update msgFor task =
---     case msgFor of
---         MsgForTaskEntry msg ->
---             updateTask msg task
---
---         MsgForTask _ msg ->
---             updateTask msg task
---
---         MsgForTaskList (Add id _) ->
---             newTask (id + 1) ""
---
---         _ ->
---             task
+    | New Int
 
 
 update : Msg -> Model -> Model
@@ -57,3 +41,6 @@ update msg model =
 
         Update description ->
             { model | description = description }
+
+        New id ->
+            newTask id ""

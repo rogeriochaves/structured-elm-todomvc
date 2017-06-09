@@ -21,7 +21,7 @@ taskEntry taskEntry =
             , value taskEntry.description
             , name "newTodo"
             , on "input" (Json.map (MsgForTaskEntry << Update) targetValue)
-            , onEnter NoOp (MsgForTaskList <| Add taskEntry.id taskEntry.description)
+            , onEnter Main.NoOp (MsgForTaskList <| Add taskEntry.id taskEntry.description)
             ]
             []
         ]
