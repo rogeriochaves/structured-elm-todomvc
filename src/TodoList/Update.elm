@@ -1,8 +1,8 @@
-module TodoList exposing (..)
+module TodoList.Update exposing (..)
 
 import Todo.Model exposing (newTodo)
+import Todo.Update exposing (..)
 import TodoList.Model exposing (..)
-import Todo exposing (..)
 
 
 type Msg
@@ -11,7 +11,7 @@ type Msg
     | Delete Int
     | DeleteCompleted
     | CheckAll Bool
-    | MsgForTodo Int Todo.Msg
+    | MsgForTodo Int Todo.Update.Msg
 
 
 type OutMsg
@@ -40,7 +40,7 @@ update msgFor todoList =
         CheckAll isCompleted ->
             let
                 updateTodo t =
-                    Todo.update (Check isCompleted) t
+                    Todo.Update.update (Check isCompleted) t
             in
             List.map updateTodo todoList
 
@@ -48,12 +48,12 @@ update msgFor todoList =
             updateTodo id msg todoList
 
 
-updateTodo : Int -> Todo.Msg -> Model -> Model
+updateTodo : Int -> Todo.Update.Msg -> Model -> Model
 updateTodo id msg todoList =
     let
         updateTodo todo =
             if todo.id == id then
-                Todo.update msg todo
+                Todo.Update.update msg todo
             else
                 todo
     in

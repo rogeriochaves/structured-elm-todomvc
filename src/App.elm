@@ -1,15 +1,15 @@
 module App exposing (..)
 
-import Control as Control
+import Control.Update as Control
 import Control.View as ControlsView
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Lazy exposing (lazy, lazy2)
 import Layout.InfoFooter exposing (infoFooter)
 import Model exposing (..)
-import Todo as Todo
+import Todo.Update as Todo
 import Todo.View.TodoEntry as TodoEntryView
-import TodoList as TodoList
+import TodoList.Update as TodoList
 import TodoList.View.TodoList as TodoListView
 
 

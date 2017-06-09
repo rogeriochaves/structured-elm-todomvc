@@ -5,7 +5,7 @@ import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Todo.Model as Todo
 import Todo.View.TodoItem exposing (todoItem)
-import TodoList exposing (..)
+import TodoList.Update exposing (..)
 
 
 todoList : String -> List Todo.Model -> Html Msg

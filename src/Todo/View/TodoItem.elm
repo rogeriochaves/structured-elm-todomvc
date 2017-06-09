@@ -4,13 +4,13 @@ import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
 import Json.Decode as Json
-import Todo exposing (Msg(..))
 import Todo.Model as Todo
+import Todo.Update exposing (Msg(..))
 import Todo.View.Events exposing (onEnter)
-import TodoList exposing (..)
+import TodoList.Update exposing (..)
 
 
-todoItem : Todo.Model -> Html TodoList.Msg
+todoItem : Todo.Model -> Html TodoList.Update.Msg
 todoItem todo =
     li [ classList [ ( "completed", todo.completed ), ( "editing", todo.editing ) ] ]
         [ div [ class "view" ]
@@ -36,7 +36,7 @@ todoItem todo =
             , id ("todo-" ++ toString todo.id)
             , on "input" (Json.map (MsgForTodo todo.id << Update) targetValue)
             , onBlur (MsgForTodo todo.id <| Editing False)
-            , onEnter TodoList.NoOp (MsgForTodo todo.id <| Editing False)
+            , onEnter TodoList.Update.NoOp (MsgForTodo todo.id <| Editing False)
             ]
             []
         ]

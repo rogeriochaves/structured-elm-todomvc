@@ -1,4 +1,4 @@
-module Control exposing (..)
+module Control.Update exposing (..)
 
 import Control.Model exposing (Model)
 

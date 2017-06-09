@@ -1,6 +1,6 @@
 module Control.View exposing (..)
 
-import Control exposing (..)
+import Control.Update exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (..)
@@ -47,7 +47,7 @@ controls visibility todos =
         ]
 
 
-visibilitySwap : String -> String -> String -> Html Control.Msg
+visibilitySwap : String -> String -> String -> Html Msg
 visibilitySwap uri visibility actualVisibility =
     li [ onClick (ChangeVisibility visibility) ]
         [ a [ href uri, classList [ ( "selected", visibility == actualVisibility ) ] ] [ text visibility ] ]

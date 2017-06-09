@@ -1,4 +1,4 @@
-module Todo exposing (..)
+module Todo.Update exposing (..)
 
 import Todo.Model exposing (..)
 
