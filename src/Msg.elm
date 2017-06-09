@@ -1,13 +1,13 @@
 module Msg exposing (..)
 
 import Control.Msg as Control
-import Task.Msg as Task
-import TaskList.Msg as TaskList
+import Todo.Msg as Todo
+import TodoList.Msg as TodoList
 
 
 type Msg
     = NoOp
-    | MsgForTaskEntry Task.Msg
-    | MsgForTaskList TaskList.Msg
-    | MsgForTask Int Task.Msg
+    | MsgForTodoEntry Todo.Msg
+    | MsgForTodoList TodoList.Msg
+    | MsgForTodo Int Todo.Msg
     | MsgForControl Control.Msg

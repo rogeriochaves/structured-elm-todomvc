@@ -1,4 +1,4 @@
-module Task.View.Events exposing (..)
+module Todo.View.Events exposing (..)
 
 import Html exposing (..)
 import Html.Events exposing (..)

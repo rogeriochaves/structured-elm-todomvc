@@ -1,4 +1,4 @@
-module Task.Msg exposing (..)
+module Todo.Msg exposing (..)
 
 
 type Msg

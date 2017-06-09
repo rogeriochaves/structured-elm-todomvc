@@ -2,21 +2,21 @@ module Model exposing (..)
 
 import Control.Model as Control
 import Msg exposing (Msg)
-import Task.Model as Task
-import TaskList.Model as TaskList
+import Todo.Model as Todo
+import TodoList.Model as TodoList
 
 
 type alias Model =
-    { taskEntry : Task.Model
-    , taskList : TaskList.Model
+    { todoEntry : Todo.Model
+    , todoList : TodoList.Model
     , control : Control.Model
     }
 
 
 initialModel : Model
 initialModel =
-    { taskEntry = Task.model
-    , taskList = TaskList.model
+    { todoEntry = Todo.model
+    , todoList = TodoList.model
     , control = Control.model
     }
 

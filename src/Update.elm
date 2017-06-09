@@ -3,8 +3,8 @@ module Update exposing (..)
 import Control.Update as Control
 import Model exposing (Model)
 import Msg exposing (..)
-import Task.Update as Task
-import TaskList.Update as TaskList
+import Todo.Update as Todo
+import TodoList.Update as TodoList
 
 
 type alias FocusPort =
@@ -19,8 +19,8 @@ updateWithCmd focus msg model =
 update : Msg -> Model -> Model
 update msg model =
     { model
-        | taskEntry = Task.update msg model.taskEntry
-        , taskList = TaskList.update msg model.taskList
+        | todoEntry = Todo.update msg model.todoEntry
+        , todoList = TodoList.update msg model.todoList
         , control = Control.update msg model.control
     }
 
@@ -28,5 +28,5 @@ update msg model =
 updateCmd : FocusPort -> Msg -> Cmd Msg
 updateCmd focus msg =
     Cmd.batch
-        [ Task.updateTaskCmd focus msg
+        [ Todo.updateTodoCmd focus msg
         ]
