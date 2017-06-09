@@ -1,17 +1,18 @@
 port module Todo exposing (..)
 
-import Html.App as App
+import Html
 import TodoApp.Model exposing (Model, init, withSetStorage)
-import TodoApp.View.TodoApp exposing (view)
+import TodoApp.Msg exposing (Msg)
 import TodoApp.Update exposing (updateWithCmd)
+import TodoApp.View.TodoApp exposing (view)
 
 
-main : Program (Maybe Model)
+main : Program (Maybe Model) Model Msg
 main =
-    App.programWithFlags
+    Html.programWithFlags
         { init = init
         , view = view
-        , update = (\msg model -> withSetStorage setStorage (updateWithCmd focus msg model))
+        , update = \msg model -> withSetStorage setStorage (updateWithCmd focus msg model)
         , subscriptions = \_ -> Sub.none
         }
 

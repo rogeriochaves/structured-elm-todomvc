@@ -1,12 +1,12 @@
 module TodoApp.TaskList.Update exposing (..)
 
-import TodoApp.Msg as Main exposing (..)
-import TodoApp.Task.Msg as Task exposing (..)
-import TodoApp.TaskList.Msg as TaskList exposing (..)
-import TodoApp.Task.Model exposing (newTask)
-import TodoApp.TaskList.Model exposing (Model)
-import TodoApp.Task.Update as UpdateTask
 import String
+import TodoApp.Msg as Main exposing (..)
+import TodoApp.Task.Model exposing (newTask)
+import TodoApp.Task.Msg as Task exposing (..)
+import TodoApp.Task.Update as UpdateTask
+import TodoApp.TaskList.Model exposing (Model)
+import TodoApp.TaskList.Msg as TaskList exposing (..)
 
 
 update : Main.Msg -> Model -> Model
@@ -42,7 +42,7 @@ updateTaskList msg taskList =
                 updateTask t =
                     UpdateTask.updateTask (Check isCompleted) t
             in
-                List.map updateTask taskList
+            List.map updateTask taskList
 
 
 updateTask : Int -> Task.Msg -> Model -> Model
@@ -54,4 +54,4 @@ updateTask id msg taskList =
             else
                 task
     in
-        List.map updateTask taskList
+    List.map updateTask taskList

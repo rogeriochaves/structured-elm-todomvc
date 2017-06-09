@@ -1,9 +1,9 @@
 module TodoApp.Model exposing (..)
 
-import TodoApp.Task.Model as Task
-import TodoApp.TaskList.Model as TaskList
 import TodoApp.Control.Model as Control
 import TodoApp.Msg exposing (Msg)
+import TodoApp.Task.Model as Task
+import TodoApp.TaskList.Model as TaskList
 
 
 type alias Model =
