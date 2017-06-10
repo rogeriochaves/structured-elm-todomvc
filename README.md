@@ -1,25 +1,12 @@
 # Structured TodoMVC in Elm
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
+This repository have examples of different styles in scaling an Elm App. The [official TodoMVC Elm example](https://github.com/evancz/elm-todomvc), a single file app, was used to show how to structure your app in different modules and files, allowing it to scale.
 
-This is based on the [official TodoMVC Elm example](https://github.com/evancz/elm-todomvc), but instead of putting all the code in one file, this project has the goal to exemplify how you would break that file in different modules to create your app structure, always following [The Elm Architecture](https://github.com/evancz/elm-architecture-tutorial).
+Check out the different refactors:
 
-## Project Structure
+- [NoMap approach with Domain focus](https://github.com/rogeriochaves/structured-elm-todomvc/tree/nomap-domain)
+- [NoMap approach with Technical focus](https://github.com/rogeriochaves/structured-elm-todomvc/tree/nomap-technical)
+- [OutMsg approach](https://github.com/rogeriochaves/structured-elm-todomvc/tree/outmsg)
+- [Translator approach](https://github.com/rogeriochaves/structured-elm-todomvc/tree/translator)
 
-We have four main folders: Action, Model, Update and View.
-
-Each one of those folders have a Main.elm file, which combines all other modules, e.g. the Update.Main is a combination of all other Updates in the project, the Model.Main is a combination of all other models in the project, and so on.
-
-Finally, the root main file, called Todo.elm, uses the Main Update, the Main Model and the Main View to start your app.
-
-<a href="https://github.com/rogeriochaves/structured-elm-todomvc/tree/modular" style="font-size:22px">Checkout the modularized alternative too</a>
-
-## Build Instructions
-
-Run the following command from the root of this project:
-
-```bash
-elm-make Main.elm --output elm.js
-```
-
-Then open `index.html` in your browser!
+Alos, be sure to read [the blogpost](https://medium.com/@_rchaves_/structured-todomvc-example-with-elm-a68d87cd38da) explaining how to start a refactor like this.
